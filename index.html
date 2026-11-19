@@ -1,886 +1,926 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8" />
+<meta charset="UTF-8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-<title>Emilio Madrigal Mendoza — ECE</title>
+<title>Emilio Madrigal Mendoza — Electrical &amp; Computer Engineering</title>
+<meta name="description" content="Portfolio of Emilio Madrigal Mendoza, Electrical & Computer Engineering student at Duke University — embedded systems, signal processing, digital logic, robotics and software."/>
+<meta name="theme-color" content="#0A0C0F"/>
 <link rel="preconnect" href="https://fonts.googleapis.com"/>
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=DM+Mono:wght@300;400&display=swap" rel="stylesheet"/>
-<style>
-  :root {
-    --bg: #F5F3EF;
-    --ink: #1A1A18;
-    --muted: #6B6960;
-    --accent: #2D5FA8;
-    --rule: #D6D2CA;
-    --card-bg: #EFECE6;
-  }
-
-  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-  html { scroll-behavior: smooth; }
-
-  body {
-    background: var(--bg);
-    color: var(--ink);
-    font-family: 'DM Mono', monospace;
-    font-weight: 300;
-    font-size: 13px;
-    line-height: 1.7;
-    min-height: 100vh;
-  }
-
-  /* ── NAV ── */
-  nav {
-    position: fixed;
-    top: 0; left: 0; right: 0;
-    z-index: 100;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding: 22px 60px;
-    background: var(--bg);
-    border-bottom: 1px solid var(--rule);
-    opacity: 0;
-    animation: fadeIn 0.8s ease 0.1s forwards;
-  }
-
-  .nav-logo {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: 18px;
-    font-weight: 400;
-    letter-spacing: 0.01em;
-    color: var(--ink);
-    text-decoration: none;
-  }
-
-  .nav-links {
-    display: flex;
-    gap: 36px;
-    list-style: none;
-    align-items: center;
-  }
-
-  .nav-links a {
-    color: var(--muted);
-    text-decoration: none;
-    font-size: 11px;
-    letter-spacing: 0.12em;
-    text-transform: uppercase;
-    transition: color 0.2s;
-  }
-
-  .nav-links a:hover { color: var(--ink); }
-
-  /* ── HERO ── */
-  #hero {
-    min-height: 100vh;
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-end;
-    padding: 0 60px 80px;
-    position: relative;
-    overflow: hidden;
-  }
-
-  .hero-bg-text {
-    position: absolute;
-    top: 50%; left: 50%;
-    transform: translate(-50%, -50%);
-    font-family: 'Cormorant Garamond', serif;
-    font-size: clamp(120px, 18vw, 240px);
-    font-weight: 300;
-    color: transparent;
-    -webkit-text-stroke: 1px var(--rule);
-    white-space: nowrap;
-    pointer-events: none;
-    user-select: none;
-    opacity: 0;
-    animation: fadeIn 1.2s ease 0.3s forwards;
-  }
-
-  .hero-content { position: relative; z-index: 2; }
-
-  .hero-status {
-    display: inline-flex;
-    align-items: center;
-    gap: 8px;
-    font-size: 10px;
-    letter-spacing: 0.14em;
-    text-transform: uppercase;
-    color: var(--muted);
-    margin-bottom: 16px;
-    opacity: 0;
-    animation: slideUp 0.8s ease 0.3s forwards;
-  }
-
-  .hero-status-dot {
-    width: 6px; height: 6px;
-    background: #3DAA5C;
-    border-radius: 50%;
-    flex-shrink: 0;
-  }
-
-  .hero-label {
-    font-size: 11px;
-    letter-spacing: 0.14em;
-    text-transform: uppercase;
-    color: var(--muted);
-    margin-bottom: 20px;
-    opacity: 0;
-    animation: slideUp 0.8s ease 0.4s forwards;
-  }
-
-  .hero-name {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: clamp(52px, 8vw, 100px);
-    font-weight: 300;
-    line-height: 1.0;
-    letter-spacing: -0.01em;
-    margin-bottom: 28px;
-    opacity: 0;
-    animation: slideUp 0.8s ease 0.55s forwards;
-  }
-
-  .hero-name em { font-style: italic; color: var(--accent); }
-
-  .hero-bottom {
-    display: flex;
-    align-items: flex-end;
-    justify-content: space-between;
-    opacity: 0;
-    animation: slideUp 0.8s ease 0.7s forwards;
-  }
-
-  .hero-desc-group {
-    display: flex;
-    flex-direction: column;
-    gap: 20px;
-    max-width: 420px;
-  }
-
-  .hero-desc {
-    color: var(--muted);
-    font-size: 12px;
-    line-height: 1.8;
-  }
-
-  .hero-scroll {
-    font-size: 11px;
-    letter-spacing: 0.1em;
-    text-transform: uppercase;
-    color: var(--muted);
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 10px;
-    text-decoration: none;
-  }
-
-  .hero-scroll-line {
-    width: 1px; height: 48px;
-    background: var(--muted);
-    animation: pulse 2s ease-in-out infinite;
-  }
-
-  /* ── SECTIONS ── */
-  section {
-    padding: 100px 60px;
-    border-top: 1px solid var(--rule);
-  }
-
-  .section-header {
-    display: flex;
-    align-items: baseline;
-    gap: 20px;
-    margin-bottom: 64px;
-  }
-
-  .section-num {
-    font-size: 11px;
-    letter-spacing: 0.12em;
-    color: var(--muted);
-    text-transform: uppercase;
-  }
-
-  .section-title {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: clamp(36px, 5vw, 56px);
-    font-weight: 300;
-    line-height: 1.1;
-  }
-
-  /* ── ABOUT ── */
-  #about .about-grid {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 80px;
-    align-items: start;
-  }
-
-  .about-bio {
-    font-size: 14px;
-    line-height: 1.9;
-    color: var(--ink);
-  }
-
-  .about-bio p + p { margin-top: 20px; }
-
-  .about-sidebar {
-    display: flex;
-    flex-direction: column;
-    gap: 32px;
-  }
-
-  .sidebar-label {
-    font-size: 10px;
-    letter-spacing: 0.16em;
-    text-transform: uppercase;
-    color: var(--muted);
-    margin-bottom: 10px;
-    padding-bottom: 8px;
-    border-bottom: 1px solid var(--rule);
-  }
-
-  .tag-list {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 8px;
-    margin-top: 10px;
-  }
-
-  .tag {
-    font-size: 10px;
-    letter-spacing: 0.08em;
-    text-transform: uppercase;
-    border: 1px solid var(--rule);
-    padding: 5px 10px;
-    color: var(--muted);
-    transition: border-color 0.2s, color 0.2s;
-  }
-
-  .tag:hover { border-color: var(--accent); color: var(--accent); }
-
-  /* ── PROJECT CARDS ── */
-  #projects .projects-grid {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 3px;
-  }
-
-  .project-card {
-    background: var(--card-bg);
-    display: flex;
-    flex-direction: column;
-    overflow: hidden;
-    transition: background 0.25s;
-  }
-
-  .project-card.full-width { grid-column: 1 / -1; }
-  .project-card:hover { background: #E8E4DB; }
-
-  .project-img-link {
-    display: block;
-    overflow: hidden;
-    flex-shrink: 0;
-    cursor: zoom-in;
-  }
-
-  .project-img-slot {
-    height: 220px;
-    overflow: hidden;
-  }
-
-  .project-img-slot img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    object-position: center;
-    display: block;
-    transition: transform 0.45s ease;
-  }
-
-  .project-img-slot img.contain {
-    object-fit: contain;
-    background: #E2DFD8;
-    padding: 12px;
-  }
-
-  .project-img-slot img.contain-dark {
-    object-fit: contain;
-    background: #141414;
-    padding: 10px;
-  }
-
-  .project-img-link:hover .project-img-slot img { transform: scale(1.04); }
-
-  .project-img-gallery {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 3px;
-    height: 320px;
-    flex-shrink: 0;
-  }
-
-  .project-img-gallery .project-img-link {
-    height: 100%;
-    cursor: zoom-in;
-  }
-
-  .project-img-gallery .project-img-link img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    object-position: top;
-    display: block;
-    transition: transform 0.45s ease;
-  }
-
-  .project-img-gallery .project-img-link:hover img { transform: scale(1.04); }
-
-  .project-card-body {
-    padding: 28px 36px 36px;
-    display: flex;
-    flex-direction: column;
-    gap: 14px;
-    flex-grow: 1;
-  }
-
-  .project-card-top {
-    display: flex;
-    justify-content: space-between;
-    align-items: flex-start;
-  }
-
-  .project-num {
-    font-size: 10px;
-    letter-spacing: 0.14em;
-    color: var(--muted);
-    text-transform: uppercase;
-  }
-
-  .project-domain {
-    font-size: 10px;
-    letter-spacing: 0.1em;
-    text-transform: uppercase;
-    color: var(--accent);
-    border: 1px solid var(--accent);
-    padding: 3px 8px;
-    opacity: 0.8;
-  }
-
-  .project-title {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: 26px;
-    font-weight: 400;
-    line-height: 1.2;
-  }
-
-  .project-title-link {
-    color: inherit;
-    text-decoration: none;
-    border-bottom: 1px solid transparent;
-    transition: border-color 0.2s, color 0.2s;
-  }
-
-  .project-title-link:hover {
-    color: var(--accent);
-    border-bottom-color: var(--accent);
-  }
-
-  .project-desc {
-    font-size: 12px;
-    line-height: 1.8;
-    color: var(--muted);
-    flex-grow: 1;
-  }
-
-  .project-tools {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 6px;
-  }
-
-  .tool-chip {
-    font-size: 10px;
-    letter-spacing: 0.06em;
-    color: var(--muted);
-    background: var(--bg);
-    padding: 3px 8px;
-    border: 1px solid var(--rule);
-  }
-
-  .project-link {
-    font-size: 10px;
-    letter-spacing: 0.1em;
-    text-transform: uppercase;
-    color: var(--accent);
-    text-decoration: none;
-    display: inline-block;
-  }
-
-  .project-link:hover { text-decoration: underline; }
-
-  /* ── CONTACT ── */
-  #contact { display: flex; flex-direction: column; gap: 0; }
-
-  .contact-inner {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 80px;
-    align-items: center;
-  }
-
-  .contact-tagline {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: clamp(36px, 5vw, 64px);
-    font-weight: 300;
-    line-height: 1.15;
-  }
-
-  .contact-tagline em { font-style: italic; color: var(--accent); }
-
-  .contact-links { display: flex; flex-direction: column; gap: 24px; }
-
-  .contact-item {
-    display: flex;
-    flex-direction: column;
-    gap: 4px;
-    padding-bottom: 24px;
-    border-bottom: 1px solid var(--rule);
-  }
-
-  .contact-item:last-child { border-bottom: none; padding-bottom: 0; }
-
-  .contact-item-label {
-    font-size: 10px;
-    letter-spacing: 0.14em;
-    text-transform: uppercase;
-    color: var(--muted);
-  }
-
-  .contact-item-value {
-    font-size: 14px;
-    color: var(--ink);
-    text-decoration: none;
-    transition: color 0.2s;
-  }
-
-  .contact-item-value:hover { color: var(--accent); }
-
-  /* ── FOOTER ── */
-  footer {
-    border-top: 1px solid var(--rule);
-    padding: 28px 60px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    font-size: 11px;
-    color: var(--muted);
-    letter-spacing: 0.06em;
-  }
-
-  /* ── ANIMATIONS ── */
-  @keyframes fadeIn { to { opacity: 1; } }
-  @keyframes slideUp {
-    from { opacity: 0; transform: translateY(20px); }
-    to   { opacity: 1; transform: translateY(0); }
-  }
-  @keyframes pulse {
-    0%, 100% { opacity: 0.4; }
-    50%       { opacity: 1; }
-  }
-
-  .reveal {
-    opacity: 0;
-    transform: translateY(24px);
-    transition: opacity 0.7s ease, transform 0.7s ease;
-  }
-
-  .reveal.visible { opacity: 1; transform: translateY(0); }
-
-  /* ── RESPONSIVE ── */
-  @media (max-width: 768px) {
-    nav { padding: 18px 24px; }
-    .nav-links { gap: 20px; }
-    #hero { padding: 0 24px 60px; }
-    section { padding: 72px 24px; }
-    #about .about-grid,
-    #projects .projects-grid,
-    .contact-inner { grid-template-columns: 1fr; gap: 40px; }
-    .project-card.full-width { grid-column: 1; }
-    footer { flex-direction: column; gap: 10px; text-align: center; }
-    .hero-bottom { flex-direction: column; gap: 24px; align-items: flex-start; }
-    .hero-scroll { flex-direction: row; gap: 16px; }
-    .hero-scroll-line { width: 48px; height: 1px; }
-    .project-img-slot { height: 200px; }
-    .project-img-gallery { grid-template-columns: 1fr; height: auto; }
-    .project-img-gallery .project-img-link:nth-child(n+2) { display: none; }
-    .project-card-body { padding: 22px 24px 28px; }
-  }
-</style>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500&family=JetBrains+Mono:wght@400;500&family=Space+Grotesk:wght@400;500;600&display=swap" rel="stylesheet"/>
+<link rel="stylesheet" href="styles.css"/>
+<link rel="stylesheet" href="projects.css"/>
+<script defer src="main.js"></script>
+<script defer src="projects.js"></script>
 </head>
 <body>
 
-<nav>
-  <a class="nav-logo" href="#hero">EMM</a>
-  <ul class="nav-links">
-    <li><a href="#about">About</a></li>
-    <li><a href="#projects">Projects</a></li>
-    <li><a href="#contact">Contact</a></li>
+<!-- Icon sprite -->
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <symbol id="i-github" viewBox="0 0 24 24"><path fill="currentColor" d="M12 .5a11.5 11.5 0 0 0-3.64 22.41c.58.1.79-.25.79-.56v-2c-3.2.7-3.88-1.37-3.88-1.37-.52-1.33-1.28-1.69-1.28-1.69-1.05-.71.08-.7.08-.7 1.16.08 1.77 1.19 1.77 1.19 1.03 1.77 2.7 1.26 3.36.96.1-.75.4-1.26.73-1.55-2.55-.29-5.24-1.28-5.24-5.69 0-1.26.45-2.29 1.19-3.1-.12-.29-.52-1.46.11-3.05 0 0 .97-.31 3.17 1.18a11 11 0 0 1 5.77 0c2.2-1.49 3.17-1.18 3.17-1.18.63 1.59.23 2.76.11 3.05.74.81 1.19 1.84 1.19 3.1 0 4.42-2.7 5.39-5.26 5.68.41.36.78 1.06.78 2.14v3.17c0 .31.21.67.8.56A11.5 11.5 0 0 0 12 .5Z"/></symbol>
+  <symbol id="i-linkedin" viewBox="0 0 24 24"><path fill="currentColor" d="M20.45 20.45h-3.56v-5.57c0-1.33-.02-3.04-1.85-3.04-1.86 0-2.14 1.45-2.14 2.94v5.67H9.34V9h3.42v1.56h.05a3.75 3.75 0 0 1 3.37-1.85c3.6 0 4.27 2.37 4.27 5.46v6.28ZM5.34 7.43a2.07 2.07 0 1 1 0-4.13 2.07 2.07 0 0 1 0 4.13ZM7.12 20.45H3.56V9h3.56v11.45ZM22.22 0H1.77C.79 0 0 .77 0 1.73v20.54C0 23.23.79 24 1.77 24h20.45c.98 0 1.78-.77 1.78-1.73V1.73C24 .77 23.2 0 22.22 0Z"/></symbol>
+  <symbol id="i-mail" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="1.6" d="M3 5.5h18v13H3z M3 6l9 7 9-7"/></symbol>
+  <symbol id="i-arrow" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="square" d="M5 12h13M13 6l6 6-6 6"/></symbol>
+  <symbol id="i-arrow-l" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="square" d="M19 12H6M11 6l-6 6 6 6"/></symbol>
+  <symbol id="i-arrow-ne" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="square" d="M7 17 17 7M8 7h9v9"/></symbol>
+  <symbol id="i-close" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="1.6" d="M6 6l12 12M18 6 6 18"/></symbol>
+  <symbol id="i-play" viewBox="0 0 24 24"><path fill="currentColor" d="M8 5v14l11-7z"/></symbol>
+</svg>
+
+<a class="skip-link" href="#main">Skip to content</a>
+<div class="progress" aria-hidden="true"><span></span></div>
+
+<!-- ═════════ NAV ═════════ -->
+<header class="nav" id="nav">
+  <a class="nav-brand" href="#top" aria-label="Emilio Madrigal Mendoza — back to top">
+    <span class="brand-mark" aria-hidden="true">
+      <svg viewBox="0 0 32 32"><path d="M2 16h5l3-8 4 16 4-12 3 4h9" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/></svg>
+    </span>
+    <span class="brand-text">Emilio Madrigal</span>
+  </a>
+  <nav aria-label="Primary">
+    <ul class="nav-links" id="nav-links">
+      <li><a href="#about" data-nav>About</a></li>
+      <li><a href="#skills" data-nav>Toolkit</a></li>
+      <li><a href="#projects" data-nav>Projects</a></li>
+      <li><a href="#contact" data-nav>Contact</a></li>
+      <li class="nav-indicator" aria-hidden="true"></li>
+    </ul>
+  </nav>
+  <a class="nav-cta" href="mailto:emiliomadrigal1999@gmail.com">
+    <span>Get in touch</span><svg><use href="#i-arrow-ne"/></svg>
+  </a>
+  <button class="nav-toggle" id="nav-toggle" aria-expanded="false" aria-controls="mobile-menu" aria-label="Open menu">
+    <span></span><span></span>
+  </button>
+</header>
+
+<div class="mobile-menu" id="mobile-menu" hidden>
+  <ul>
+    <li><a href="#about"><span>01</span>About</a></li>
+    <li><a href="#skills"><span>02</span>Toolkit</a></li>
+    <li><a href="#projects"><span>03</span>Projects</a></li>
+    <li><a href="#contact"><span>04</span>Contact</a></li>
   </ul>
-</nav>
+  <div class="mobile-menu-foot">
+    <a href="https://github.com/emilio-madrigalm" target="_blank" rel="noopener">GitHub</a>
+    <a href="https://www.linkedin.com/in/emilio-madrigal-804b69216/" target="_blank" rel="noopener">LinkedIn</a>
+  </div>
+</div>
 
-<section id="hero">
-  <div class="hero-bg-text">ECE</div>
-  <div class="hero-content">
-    <div class="hero-status">
-      <span class="hero-status-dot"></span>
+<main id="main">
+
+<!-- ═════════ HERO ═════════ -->
+<section class="hero" id="top" aria-label="Introduction">
+  <canvas class="scope" id="scope" aria-hidden="true"></canvas>
+  <div class="hero-vignette" aria-hidden="true"></div>
+
+  <div class="scope-hud scope-hud--tl" aria-hidden="true">
+    <span>CH1</span><span>BASILAR MEMBRANE · 512 SECTIONS</span>
+  </div>
+  <div class="scope-hud scope-hud--br" aria-hidden="true">
+    <span>f<sub>p</sub> = <b id="hud-f">1.01 kHz</b></span>
+    <span>PEAK @ <b id="hud-s">§192</b></span>
+    <span class="hud-hint">move cursor to retune</span>
+  </div>
+
+  <div class="hero-inner" id="hero-inner">
+    <p class="status" style="--d:.15s">
+      <span class="status-dot" aria-hidden="true"></span>
       Open to internship opportunities
-    </div>
-    <p class="hero-label">Electrical &amp; Computer Engineering — Duke University</p>
+    </p>
+    <p class="hero-kicker" style="--d:.25s">
+      Electrical &amp; Computer Engineering <span aria-hidden="true">/</span> Duke University
+    </p>
     <h1 class="hero-name">
-      Emilio<br/>
-      <em>Madrigal</em><br/>
-      Mendoza
+      <span class="line"><span style="--d:.35s">Emilio</span></span>
+      <span class="line"><span style="--d:.45s">Madrigal</span></span>
+      <span class="line"><span class="dim" style="--d:.55s">Mendoza</span></span>
     </h1>
-    <div class="hero-bottom">
-      <div class="hero-desc-group">
-        <p class="hero-desc">
-          Building at the intersection of hardware, firmware, and computation —
-          from microrobot propulsion to RISC processors.
-        </p>
-      </div>
-      <a class="hero-scroll" href="#about" aria-label="Scroll to About section">
-        <span>Scroll</span>
-        <span class="hero-scroll-line"></span>
+    <p class="hero-intro" style="--d:.75s">
+      I build where hardware, firmware and computation meet — from microrobot
+      propulsion and a 16-bit RISC processor to signal-processing models,
+      autonomous robots and full-stack apps.
+    </p>
+    <div class="hero-actions" style="--d:.9s">
+      <a class="btn btn--primary" href="#projects">
+        <span>Explore projects</span><svg><use href="#i-arrow"/></svg>
+      </a>
+      <a class="btn btn--ghost" href="https://github.com/emilio-madrigalm" target="_blank" rel="noopener">
+        <svg><use href="#i-github"/></svg><span>GitHub</span>
+      </a>
+      <a class="btn btn--ghost" href="https://www.linkedin.com/in/emilio-madrigal-804b69216/" target="_blank" rel="noopener">
+        <svg><use href="#i-linkedin"/></svg><span>LinkedIn</span>
       </a>
     </div>
   </div>
+
+  <ul class="hero-tracks" aria-label="Areas of work">
+    <li style="--d:1.05s">Hardware</li>
+    <li style="--d:1.12s">Embedded</li>
+    <li style="--d:1.19s">Signal Processing</li>
+    <li style="--d:1.26s">Robotics</li>
+    <li style="--d:1.33s">Software</li>
+  </ul>
+
+  <a class="scroll-cue" href="#about" aria-label="Scroll to About">
+    <span aria-hidden="true">Scroll</span>
+    <span class="scroll-cue-track" aria-hidden="true"><span class="scroll-cue-dot"></span></span>
+  </a>
 </section>
 
-<section id="about">
-  <div class="section-header reveal">
-    <span class="section-num">01</span>
-    <h2 class="section-title">About Me</h2>
-  </div>
+<!-- ═════════ ABOUT ═════════ -->
+<section class="section" id="about" aria-labelledby="about-title">
+  <header class="section-head" data-reveal>
+    <span class="section-index">[01]</span>
+    <h2 id="about-title">About</h2>
+    <span class="section-rule" aria-hidden="true"></span>
+  </header>
+
   <div class="about-grid">
-    <div class="about-bio reveal">
-      <p>
-        I'm a Junior at Duke University studying Electrical and Computer Engineering,
-        with a focus on building and understanding complex systems, from embedded hardware
-        to large-scale infrastructure.
+    <div class="about-copy">
+      <p class="about-lede" data-reveal>
+        Engineering student who likes to <em>build the thing</em> — then
+        measure it, break it, and understand why it works.
       </p>
-      <p>
-        Born in Mexico and raised in the U.S. since age 14, I bring a perspective shaped
-        by adaptability, discipline, and curiosity. My work spans hands-on engineering and
-        research, including developing microrobotics systems and designing hardware/software
-        projects that integrate computation with the physical world.
-      </p>
-      <p>
-        I'm especially interested in how engineering can power the next generation of
-        technologies in energy, robotics, and beyond.
-      </p>
+      <div class="about-bio" data-reveal>
+        <p>
+          I'm a Junior at Duke studying Electrical and Computer Engineering. I like building and
+          understanding complex systems — embedded controllers, processors, signal-processing
+          models and the software around them.
+        </p>
+        <p>
+          Born in Mexico and raised in the U.S. since age 14, I bring adaptability, discipline and
+          curiosity to every build. I'm especially interested in how engineering can power the next
+          generation of technologies in energy and robotics.
+        </p>
+      </div>
+      <div class="now" data-reveal>
+        <p class="now-head">Currently</p>
+        <ul class="now-list">
+          <li><span class="now-role">Research</span><span>MXene-based flying microrobots, Duke</span><span class="now-when">Jan 2026 —</span></li>
+          <li><span class="now-role">Mentoring</span><span>Duke Life peer mentor</span><span class="now-when">Aug 2025 —</span></li>
+          <li><span class="now-role">Tutoring</span><span>STEM academic coach, Grow Your World</span><span class="now-when">Sep 2024 —</span></li>
+          <li><span class="now-role">Work</span><span>Campus Mailbox Center, Duke</span><span class="now-when">Aug 2024 —</span></li>
+        </ul>
+      </div>
     </div>
-    <div class="about-sidebar reveal">
-      <div class="sidebar-block">
-        <p class="sidebar-label">Focus Areas</p>
-        <div class="tag-list">
-          <span class="tag">PCB Design</span>
-          <span class="tag">Signal Processing</span>
-          <span class="tag">Embedded Systems</span>
-          <span class="tag">Power Systems</span>
-          <span class="tag">Microrobotics</span>
-          <span class="tag">Digital Logic</span>
-        </div>
+
+    <aside class="datasheet" data-reveal aria-label="Profile summary">
+      <div class="datasheet-head">
+        <span>DATASHEET</span><span>EMM · 2026</span>
       </div>
-      <div class="sidebar-block">
-        <p class="sidebar-label">Education</p>
-        <div class="tag-list">
-          <span class="tag">Duke University</span>
-          <span class="tag">ECE Junior</span>
-        </div>
-      </div>
-      <div class="sidebar-block">
-        <p class="sidebar-label">Tools &amp; Languages</p>
-        <div class="tag-list">
-          <span class="tag">C / C++</span>
-          <span class="tag">Java</span>
-          <span class="tag">Assembly</span>
-          <span class="tag">MATLAB</span>
-          <span class="tag">Logisim</span>
-          <span class="tag">Arduino</span>
-          <span class="tag">NIR Laser Systems</span>
-        </div>
-      </div>
+      <dl>
+        <div><dt>Degree</dt><dd>B.S. Electrical &amp; Computer Engineering</dd></div>
+        <div><dt>Institution</dt><dd>Duke University</dd></div>
+        <div><dt>Standing</dt><dd>Junior · Class of 2028</dd></div>
+        <div><dt>Graduation</dt><dd>May 2028</dd></div>
+        <div><dt>Based</dt><dd>Durham, NC · Citrus Heights, CA</dd></div>
+        <div><dt>Origin</dt><dd>Born in Mexico · U.S. since 14</dd></div>
+        <div><dt>Languages</dt><dd>English · Spanish</dd></div>
+        <div><dt>Status</dt><dd class="ok"><span class="status-dot" aria-hidden="true"></span>Open to internships</dd></div>
+      </dl>
+    </aside>
+  </div>
+
+  <div class="focus" data-reveal>
+    <p class="panel-head"><span>Focus areas</span><span>06 domains</span></p>
+    <ol class="focus-list">
+      <li><span>01</span>PCB Design</li>
+      <li><span>02</span>Signal Processing</li>
+      <li><span>03</span>Embedded Systems</li>
+      <li><span>04</span>Power Systems</li>
+      <li><span>05</span>Microrobotics</li>
+      <li><span>06</span>Digital Logic</li>
+    </ol>
+  </div>
+</section>
+
+<!-- ═════════ SKILLS ═════════ -->
+<section class="section" id="skills" aria-labelledby="skills-title">
+  <header class="section-head" data-reveal>
+    <span class="section-index">[02]</span>
+    <h2 id="skills-title">Toolkit</h2>
+    <span class="section-rule" aria-hidden="true"></span>
+  </header>
+  <p class="section-sub" data-reveal>Hover a tool to trace the projects it powers — click to pin it while you scroll. Hover a project to see its stack.</p>
+
+  <div class="trace" id="trace" data-reveal>
+    <span class="trace-label">TRACE</span>
+    <ol class="trace-projects" aria-label="Projects">
+      <li><a href="#p-cochlear" data-project="cochlear"><span>01</span>Cochlear</a></li>
+      <li><a href="#p-esp32" data-project="esp32"><span>02</span>ESP32</a></li>
+      <li><a href="#p-forage" data-project="forage"><span>03</span>Forage</a></li>
+      <li><a href="#p-cxbot" data-project="cxbot"><span>04</span>CX-Bot</a></li>
+      <li><a href="#p-cpu" data-project="cpu"><span>05</span>RISC CPU</a></li>
+      <li><a href="#p-route" data-project="route"><span>06</span>Route Finder</a></li>
+      <li><a href="#p-mxene" data-project="mxene"><span>07</span>MXene</a></li>
+    </ol>
+    <span class="trace-out" id="trace-out" aria-live="polite">Select a tool</span>
+  </div>
+
+  <div class="modules">
+    <div class="module" data-reveal>
+      <div class="module-head"><span class="module-id">MOD-A</span><h3>Programming Languages</h3></div>
+      <ul class="chips">
+        <li><button class="chip" data-used="esp32 cxbot">C / C++</button></li>
+        <li><button class="chip" data-used="route">Java</button></li>
+        <li><button class="chip" data-used="forage">TypeScript</button></li>
+        <li><button class="chip" data-used="cochlear">MATLAB</button></li>
+        <li><button class="chip" data-used="cpu">Assembly</button></li>
+        <li><button class="chip" data-used="">Python</button></li>
+      </ul>
+    </div>
+    <div class="module" data-reveal>
+      <div class="module-head"><span class="module-id">MOD-B</span><h3>Hardware &amp; Embedded</h3></div>
+      <ul class="chips">
+        <li><button class="chip" data-used="esp32">ESP32</button></li>
+        <li><button class="chip" data-used="cxbot">Arduino</button></li>
+        <li><button class="chip" data-used="esp32">L298N H-Bridge · PWM</button></li>
+        <li><button class="chip" data-used="esp32">SSD1306 OLED · I²C</button></li>
+        <li><button class="chip" data-used="esp32">Bluetooth SPP</button></li>
+        <li><button class="chip" data-used="cxbot">XBee Wireless</button></li>
+        <li><button class="chip" data-used="cxbot">QTI Line Sensors</button></li>
+        <li><button class="chip" data-used="">Circuit Design</button></li>
+        <li><button class="chip" data-used="">Power Electronics</button></li>
+        <li><button class="chip" data-used="">PCB Design</button></li>
+      </ul>
+    </div>
+    <div class="module" data-reveal>
+      <div class="module-head"><span class="module-id">MOD-C</span><h3>Engineering &amp; Design</h3></div>
+      <ul class="chips">
+        <li><button class="chip" data-used="cpu">Digital Logic Design</button></li>
+        <li><button class="chip" data-used="cpu">ISA &amp; Datapath Design</button></li>
+        <li><button class="chip" data-used="cochlear">IIR Filter Design</button></li>
+        <li><button class="chip" data-used="cochlear">FFT Analysis</button></li>
+        <li><button class="chip" data-used="route">Graph Algorithms</button></li>
+        <li><button class="chip" data-used="cxbot esp32">Integration Testing</button></li>
+        <li><button class="chip" data-used="mxene">Material Fabrication</button></li>
+        <li><button class="chip" data-used="mxene">NIR Laser Systems</button></li>
+        <li><button class="chip" data-used="mxene">Experimental Testing</button></li>
+        <li><button class="chip" data-used="">CAD</button></li>
+      </ul>
+    </div>
+    <div class="module" data-reveal>
+      <div class="module-head"><span class="module-id">MOD-D</span><h3>Software &amp; Tools</h3></div>
+      <ul class="chips">
+        <li><button class="chip" data-used="cpu">Logisim Evolution</button></li>
+        <li><button class="chip" data-used="esp32">Arduino IDE</button></li>
+        <li><button class="chip" data-used="">Simulink</button></li>
+        <li><button class="chip" data-used="forage">React Native · Expo</button></li>
+        <li><button class="chip" data-used="forage">Supabase · PostgreSQL</button></li>
+        <li><button class="chip" data-used="forage">Auth0</button></li>
+        <li><button class="chip" data-used="forage">OpenAI GPT-4o</button></li>
+        <li><button class="chip" data-used="esp32 cochlear">Git &amp; GitHub</button></li>
+        <li><button class="chip" data-used="">Linux</button></li>
+      </ul>
     </div>
   </div>
 </section>
 
-<section id="projects">
-  <div class="section-header reveal">
-    <span class="section-num">02</span>
-    <h2 class="section-title">Projects</h2>
-  </div>
-  <div class="projects-grid">
+<!-- ═════════ PROJECTS ═════════ -->
+<section class="section" id="projects" aria-labelledby="projects-title">
+  <header class="section-head" data-reveal>
+    <span class="section-index">[03]</span>
+    <h2 id="projects-title">Selected Work</h2>
+    <span class="section-rule" aria-hidden="true"></span>
+    <span class="section-count">07 projects</span>
+  </header>
+  <p class="section-sub" data-reveal>Open any project for the full story — the problem, how it was built, what broke, and what it measured.</p>
 
-    <div class="project-card reveal">
-      <div class="project-card-body">
-        <div class="project-card-top">
-          <span class="project-num">001</span>
-          <span class="project-domain">Microrobotics</span>
-        </div>
-        <h3 class="project-title">MXene Vapor-Propelled Microrobot</h3>
+  <div class="bento">
+
+    <!-- 01 Cochlear -->
+    <article class="project p-cochlear" id="p-cochlear" data-reveal>
+      <a class="project-hit" href="#work/cochlear" data-open="cochlear" aria-label="View project: Cochlear Filter-Bank Model"></a>
+      <div class="project-media media--dark">
+        <img src="img/cochlear-travelling-wave.png" width="1109" height="694" loading="lazy" decoding="async"
+             alt="Travelling-wave envelope of a 1 kHz tone along the 512-section cochlear model: broad pressure wave on the left, sharp displacement peak near section 186 on the right"/>
+        <span class="fig">FIG. 01 · Travelling wave, 1 kHz</span>
+      </div>
+      <div class="project-body">
+        <div class="project-meta"><span class="project-num">01</span><span class="project-domain">Signal Processing</span></div>
+        <h3 class="project-title">Cochlear Filter-Bank Model</h3>
         <p class="project-desc">
-          Identified asymmetric vapor jetting as the mechanism behind controllable rotational
-          flight in an untethered microrobot — fabricated MXene composite films, characterized
-          propulsion under NIR laser irradiation, and confirmed stability through systematic
-          experimental testing.
+          A 512-section cascaded IIR model of the human cochlea in MATLAB, mapped from 7.5 kHz down
+          to 35 Hz. Two stages of spatial differentiation narrow the response to a 1 kHz tone by ~92%,
+          turning the model into a spectrum analyser in space.
         </p>
-        <div class="project-tools">
-          <span class="tool-chip">Material Fabrication</span>
-          <span class="tool-chip">NIR Laser Systems</span>
-          <span class="tool-chip">Experimental Testing</span>
-          <span class="tool-chip">Data Analysis</span>
+        <ul class="tools"><li>MATLAB</li><li>IIR Filter Design</li><li>DSP</li><li>FFT Analysis</li></ul>
+        <div class="project-actions">
+          <span class="project-cta" aria-hidden="true">View project<svg><use href="#i-arrow"/></svg></span>
+          <a class="link-btn" href="https://github.com/emilio-madrigalm/cochlear-model" target="_blank" rel="noopener"><svg><use href="#i-github"/></svg>Source</a>
         </div>
       </div>
-    </div>
+    </article>
 
-    <div class="project-card reveal">
-      <a class="project-img-link" href="./cpu.png" target="_blank" rel="noopener" aria-label="View full Logisim schematic">
-        <div class="project-img-slot">
-          <img class="contain" src="./cpu.png" alt="Logisim circuit diagram of the complete 16-bit single-cycle RISC processor"/>
-        </div>
-      </a>
-      <div class="project-card-body">
-        <div class="project-card-top">
-          <span class="project-num">002</span>
-          <span class="project-domain">Digital Logic</span>
-        </div>
-        <h3 class="project-title">16-bit RISC CPU</h3>
+    <!-- 02 ESP32 -->
+    <article class="project p-esp32" id="p-esp32" data-reveal>
+      <a class="project-hit" href="#work/esp32" data-open="esp32" aria-label="View project: ESP32 Open-Loop DC Motor Speed Controller"></a>
+      <div class="project-media media--video">
+        <img src="img/esp32-demo-poster.jpg" width="794" height="1400" loading="lazy" decoding="async"
+             alt="Overhead view of the ESP32 motor controller build: ESP32 on a breadboard, L298N H-bridge, DC gear motor, OLED display, and a phone running a Bluetooth serial terminal"/>
+        <video class="hover-video" muted loop playsinline preload="none" data-src="img/esp32-demo.mp4" aria-hidden="true"></video>
+        <span class="fig fig--live"><svg><use href="#i-play"/></svg>Live demo</span>
+      </div>
+      <div class="project-body">
+        <div class="project-meta"><span class="project-num">02</span><span class="project-domain">Embedded Systems</span></div>
+        <h3 class="project-title">ESP32 DC Motor Speed Controller</h3>
         <p class="project-desc">
-          Built and verified a complete single-cycle 16-bit RISC processor in Logisim —
-          designed the custom ISA, ALU, register file, and control unit from scratch, then
-          validated correct execution by running hand-written assembly programs including
-          Fibonacci generation and prime detection.
+          Found that the ESP32's ADC tops out near 2600 of its nominal 4095, then recalibrated and
+          clamped the PWM mapping to remove the dead zone at high duty cycle. Adds OLED telemetry and
+          a Bluetooth override with a 3-second failsafe.
         </p>
-        <div class="project-tools">
-          <span class="tool-chip">Logisim Evolution</span>
-          <span class="tool-chip">Assembly</span>
-          <span class="tool-chip">Digital Logic Design</span>
+        <ul class="tools"><li>ESP32</li><li>C / C++</li><li>L298N H-Bridge</li><li>SSD1306 OLED</li><li>Bluetooth SPP</li></ul>
+        <div class="project-actions">
+          <span class="project-cta" aria-hidden="true">View project<svg><use href="#i-arrow"/></svg></span>
+          <a class="link-btn" href="https://github.com/emilio-madrigalm/esp32-motor-controller" target="_blank" rel="noopener"><svg><use href="#i-github"/></svg>Source</a>
         </div>
       </div>
-    </div>
+    </article>
 
-    <div class="project-card reveal">
-      <a class="project-img-link" href="./esp32-project/esp32-breadboard.png" target="_blank" rel="noopener" aria-label="View ESP32 motor controller breadboard">
-        <div class="project-img-slot">
-          <img src="./esp32-project/esp32-breadboard.png" alt="ESP32 motor controller breadboard with L298N H-bridge, DC motor, and wiring"/>
-        </div>
-      </a>
-      <div class="project-card-body">
-        <div class="project-card-top">
-          <span class="project-num">003</span>
-          <span class="project-domain">Embedded Systems</span>
-        </div>
-        <h3 class="project-title">
-          <a class="project-title-link" href="https://github.com/emilio-madrigalm/esp32-motor-controller" target="_blank" rel="noopener">ESP32 Open-Loop DC Motor Speed Controller</a>
-        </h3>
-        <p class="project-desc">
-          Diagnosed and corrected ESP32 ADC non-linearity — recalibrated the PWM duty-cycle
-          mapping to eliminate control discontinuities at high duty cycle. The system integrates
-          potentiometer input, SSD1306 OLED telemetry display, and a bidirectional Bluetooth
-          Serial interface for remote speed override.
-        </p>
-        <div class="project-tools">
-          <span class="tool-chip">ESP32</span>
-          <span class="tool-chip">C / C++</span>
-          <span class="tool-chip">L298N H-Bridge</span>
-          <span class="tool-chip">SSD1306 OLED</span>
-          <span class="tool-chip">Bluetooth SPP</span>
-        </div>
-        <a class="project-link" href="https://github.com/emilio-madrigalm/esp32-motor-controller" target="_blank" rel="noopener">View on GitHub →</a>
+    <!-- 03 Forage -->
+    <article class="project p-forage" id="p-forage" data-reveal>
+      <a class="project-hit" href="#work/forage" data-open="forage" aria-label="View project: Forage — Gamified Nature Exploration App"></a>
+      <div class="project-media media--phones">
+        <img src="img/forage-identifying.jpg" width="646" height="1400" loading="lazy" decoding="async" alt="Forage app identifying a plant species — AI processing screen"/>
+        <img src="img/forage-species-card.jpg" width="646" height="1400" loading="lazy" decoding="async" alt="Forage species fact card: American Beech with 85% match confidence"/>
+        <img src="img/forage-modes.jpg" width="646" height="1400" loading="lazy" decoding="async" alt="Forage mode picker: Discovery, Expedition and Live Expedition"/>
+        <img src="img/forage-leaderboard.jpg" width="646" height="1400" loading="lazy" decoding="async" alt="Forage leaderboard with emiliomadrigal32 ranked first with 961 points"/>
+        <span class="fig">FIG. 03 · App screens</span>
       </div>
-    </div>
-
-    <div class="project-card reveal">
-      <a class="project-img-link" href="./autonomous-robot/cx-bot-track.jpg" target="_blank" rel="noopener" aria-label="View CX-Bot photo">
-        <div class="project-img-slot">
-          <img src="./autonomous-robot/cx-bot-track.jpg" alt="Autonomous CX-Bot on line-following track with XBee module and LED indicator active"/>
-        </div>
-      </a>
-      <div class="project-card-body">
-        <div class="project-card-top">
-          <span class="project-num">004</span>
-          <span class="project-domain">Embedded Systems</span>
-        </div>
-        <h3 class="project-title">Autonomous CX-Bot</h3>
-        <p class="project-desc">
-          Programmed an Arduino-based autonomous robot to navigate via QTI line sensors
-          and coordinate with peer units over XBee wireless — implementing the inter-unit
-          communication protocol and sensor fusion logic in C++.
-        </p>
-        <div class="project-tools">
-          <span class="tool-chip">Arduino</span>
-          <span class="tool-chip">C / C++</span>
-          <span class="tool-chip">XBee</span>
-          <span class="tool-chip">QTI Sensors</span>
-        </div>
-      </div>
-    </div>
-
-    <div class="project-card reveal">
-      <a class="project-img-link" href="./route-finder/route-map.png" target="_blank" rel="noopener" aria-label="View route finder output">
-        <div class="project-img-slot">
-          <img src="./route-finder/route-map.png" alt="Shortest path computed from Las Vegas NV to Durham NC across the US highway graph"/>
-        </div>
-      </a>
-      <div class="project-card-body">
-        <div class="project-card-top">
-          <span class="project-num">005</span>
-          <span class="project-domain">Algorithms</span>
-        </div>
-        <h3 class="project-title">Highway Route Finder</h3>
-        <p class="project-desc">
-          Implemented Dijkstra's shortest-path algorithm in Java over a large highway graph
-          dataset — applied a priority queue for O(E log V) performance and modeled the road
-          network as a weighted graph with clean OOP separation between routing logic and
-          data I/O.
-        </p>
-        <div class="project-tools">
-          <span class="tool-chip">Java</span>
-          <span class="tool-chip">OOP</span>
-          <span class="tool-chip">Graph Algorithms</span>
-          <span class="tool-chip">File I/O</span>
-        </div>
-      </div>
-    </div>
-
-    <div class="project-card reveal">
-      <a class="project-img-link" href="./cochlear-model/cochlear-travelling-wave.png" target="_blank" rel="noopener" aria-label="View cochlear model travelling-wave plot">
-        <div class="project-img-slot">
-          <img class="contain-dark" src="./cochlear-model/cochlear-travelling-wave.png" alt="Travelling-wave envelope of a 1 kHz tone along the 512-section cochlear model, before and after spatial differentiation"/>
-        </div>
-      </a>
-      <div class="project-card-body">
-        <div class="project-card-top">
-          <span class="project-num">006</span>
-          <span class="project-domain">Signal Processing</span>
-        </div>
-        <h3 class="project-title">
-          <a class="project-title-link" href="https://github.com/emilio-madrigalm/cochlear-model" target="_blank" rel="noopener">Cochlear Filter-Bank Model</a>
-        </h3>
-        <p class="project-desc">
-          Modeled the human cochlea in MATLAB as a cascade of 512 second-order IIR sections,
-          each a pole-pair resonator and zero-pair notch, mapped tonotopically from 7.5 kHz
-          down to 35 Hz. Two stages of spatial differentiation narrowed the response to a
-          1 kHz tone by ~92%. Validated the model as a spectrum analyser in space: a
-          300 Hz / 1 kHz / 4 kHz mixture resolved into three distinct peaks, and a switched-off
-          tone decayed ~99% within 14 ms.
-        </p>
-        <div class="project-tools">
-          <span class="tool-chip">MATLAB</span>
-          <span class="tool-chip">IIR Filter Design</span>
-          <span class="tool-chip">DSP</span>
-          <span class="tool-chip">FFT Analysis</span>
-        </div>
-        <a class="project-link" href="https://github.com/emilio-madrigalm/cochlear-model" target="_blank" rel="noopener">View on GitHub →</a>
-      </div>
-    </div>
-
-    <div class="project-card full-width reveal">
-      <div class="project-img-gallery">
-        <a class="project-img-link" href="./hackathon/forage-identifying.png" target="_blank" rel="noopener" aria-label="Forage app — AI identifying species">
-          <img src="./hackathon/forage-identifying.png" alt="Forage app identifying a plant species — AI processing loading screen"/>
-        </a>
-        <a class="project-img-link" href="./hackathon/forage-species-card.png" target="_blank" rel="noopener" aria-label="Forage app — species fact card">
-          <img src="./hackathon/forage-species-card.png" alt="Forage app species fact card: American Beech with 85% match confidence"/>
-        </a>
-        <a class="project-img-link" href="./hackathon/forage-leaderboard.png" target="_blank" rel="noopener" aria-label="Forage app — leaderboard">
-          <img src="./hackathon/forage-leaderboard.png" alt="Forage app leaderboard — emiliomadrigal32 ranked number 1 with 961 points"/>
-        </a>
-      </div>
-      <div class="project-card-body">
-        <div class="project-card-top">
-          <span class="project-num">007</span>
-          <span class="project-domain">Hackathon</span>
-        </div>
+      <div class="project-body">
+        <div class="project-meta"><span class="project-num">03</span><span class="project-domain">Hackathon · HackDuke 2026</span></div>
         <h3 class="project-title">Forage — Gamified Nature Exploration App</h3>
         <p class="project-desc">
-          Built a full-stack mobile app in 24 hours at HackDuke 2026 where users photograph
-          plants and animals, triggering GPT-4o Vision to identify the species and auto-generate
-          a fact card with habitat, ecological relevance, and conservation notes. Engineered a
-          gamification and live expedition tracking system with a points engine featuring
-          diminishing returns, rare species bonuses, and badge awards, alongside Auth0 PKCE
-          authentication and a Supabase PostgreSQL backend.
+          A full-stack mobile app built in 24 hours. Photograph a plant or animal and GPT-4o Vision
+          identifies the species and writes a fact card; a points engine with diminishing returns,
+          rare-species bonuses and badges turns exploring outdoors into a game.
         </p>
-        <div class="project-tools">
-          <span class="tool-chip">React Native</span>
-          <span class="tool-chip">Expo</span>
-          <span class="tool-chip">TypeScript</span>
-          <span class="tool-chip">Supabase</span>
-          <span class="tool-chip">OpenAI GPT-4o</span>
-          <span class="tool-chip">Auth0</span>
+        <ul class="tools"><li>React Native</li><li>Expo</li><li>TypeScript</li><li>Supabase</li><li>OpenAI GPT-4o</li><li>Auth0</li></ul>
+        <div class="project-actions">
+          <span class="project-cta" aria-hidden="true">View project<svg><use href="#i-arrow"/></svg></span>
         </div>
       </div>
-    </div>
+    </article>
+
+    <!-- 04 CX-Bot -->
+    <article class="project p-cxbot" id="p-cxbot" data-reveal>
+      <a class="project-hit" href="#work/cxbot" data-open="cxbot" aria-label="View project: Autonomous CX-Bot"></a>
+      <div class="project-media media--triptych">
+        <img src="img/cx-bot-track.jpg" width="791" height="1400" loading="lazy" decoding="async" alt="CX-Bot on the line-following track with XBee module and LED indicator active"/>
+        <img src="img/cx-bot-close.jpg" width="791" height="1400" loading="lazy" decoding="async" alt="Close-up of the CX-Bot electronics stack"/>
+        <img src="img/cx-bot-lcd.jpg" width="791" height="1400" loading="lazy" decoding="async" alt="CX-Bot with its on-board character LCD displaying values"/>
+        <span class="fig">FIG. 04 · Blue Devil Grand Prix</span>
+      </div>
+      <div class="project-body">
+        <div class="project-meta"><span class="project-num">04</span><span class="project-domain">Robotics</span></div>
+        <h3 class="project-title">Autonomous CX-Bot</h3>
+        <p class="project-desc">
+          An Arduino robot that follows a track with QTI sensors and coordinates with peer robots over
+          XBee. Led integration testing for the 5-person team and diagnosed 3 timing bugs in the XBee
+          protocol that had caused navigation failures in 2 of 5 test runs.
+        </p>
+        <ul class="tools"><li>Arduino</li><li>C / C++</li><li>XBee</li><li>QTI Sensors</li></ul>
+        <div class="project-actions">
+          <span class="project-cta" aria-hidden="true">View project<svg><use href="#i-arrow"/></svg></span>
+        </div>
+      </div>
+    </article>
+
+    <!-- 05 CPU -->
+    <article class="project p-cpu" id="p-cpu" data-reveal>
+      <a class="project-hit" href="#work/cpu" data-open="cpu" aria-label="View project: 16-bit RISC CPU"></a>
+      <div class="project-media media--light">
+        <img src="img/cpu.png" width="1602" height="841" loading="lazy" decoding="async" alt="Logisim circuit diagram of the complete 16-bit single-cycle RISC processor"/>
+        <span class="fig">FIG. 05 · Logisim schematic</span>
+      </div>
+      <div class="project-body">
+        <div class="project-meta"><span class="project-num">05</span><span class="project-domain">Digital Logic · Computer Architecture</span></div>
+        <h3 class="project-title">16-bit RISC CPU</h3>
+        <p class="project-desc">
+          A single-cycle 16-bit RISC processor in Logisim with a custom ISA, ALU, register file,
+          decoder and control unit. Harvard architecture with separate instruction and data memory,
+          keyboard input and TTY output — verified running Fibonacci and prime-generator programs.
+        </p>
+        <ul class="tools"><li>Logisim Evolution</li><li>Assembly</li><li>Digital Logic Design</li></ul>
+        <div class="project-actions">
+          <span class="project-cta" aria-hidden="true">View project<svg><use href="#i-arrow"/></svg></span>
+        </div>
+      </div>
+    </article>
+
+    <!-- 06 Route finder -->
+    <article class="project p-route" id="p-route" data-reveal>
+      <a class="project-hit" href="#work/route" data-open="route" aria-label="View project: Highway Route Finder"></a>
+      <div class="project-media">
+        <img src="img/route-map.jpg" width="1375" height="1015" loading="lazy" decoding="async"
+             alt="Shortest path computed from Las Vegas NV to Durham NC across the US highway graph"/>
+        <span class="fig">FIG. 06 · Las Vegas → Durham</span>
+      </div>
+      <div class="project-body">
+        <div class="project-meta"><span class="project-num">06</span><span class="project-domain">Algorithms</span></div>
+        <h3 class="project-title">Highway Route Finder</h3>
+        <p class="project-desc">
+          Dijkstra's shortest-path algorithm in Java over a large U.S. highway graph, with a priority
+          queue for O(E log V) performance, nearest-vertex snapping for any city in the dataset, and a
+          timed, visualised route.
+        </p>
+        <ul class="tools"><li>Java</li><li>OOP</li><li>Graph Algorithms</li><li>File I/O</li></ul>
+        <div class="project-actions">
+          <span class="project-cta" aria-hidden="true">View project<svg><use href="#i-arrow"/></svg></span>
+        </div>
+      </div>
+    </article>
+
+    <!-- 07 MXene -->
+    <article class="project p-mxene" id="p-mxene" data-reveal>
+      <a class="project-hit" href="#work/mxene" data-open="mxene" aria-label="View project: MXene Vapor-Propelled Microrobot"></a>
+      <div class="project-media media--viz" aria-hidden="true">
+        <svg class="rotor" viewBox="0 0 200 200">
+          <circle cx="100" cy="100" r="78" class="rotor-orbit"/>
+          <circle cx="100" cy="100" r="52" class="rotor-orbit rotor-orbit--in"/>
+          <g class="rotor-spin">
+            <rect x="62" y="94" width="76" height="12" class="rotor-film"/>
+            <path d="M138 100 q14 -6 26 -2 M138 104 q16 2 30 10" class="rotor-jet"/>
+            <path d="M62 100 q-14 6 -26 2 M62 96 q-16 -2 -30 -10" class="rotor-jet"/>
+          </g>
+          <circle cx="100" cy="100" r="3" class="rotor-hub"/>
+        </svg>
+        <span class="viz-label">NIR λ → asymmetric vapor jet → rotation · schematic</span>
+        <span class="fig">FIG. 07 · Mechanism</span>
+      </div>
+      <div class="project-body">
+        <div class="project-meta"><span class="project-num">07</span><span class="project-domain">Microrobotics · Research</span></div>
+        <h3 class="project-title">MXene Vapor-Propelled Microrobot</h3>
+        <p class="project-desc">
+          Ongoing research at Duke: fabricating Ti₃C₂Tₓ MXene–agar composite films and developing
+          laser-driven propulsion — identifying asymmetric downward vapor jetting as the control method
+          for rotational flight.
+        </p>
+        <ul class="tools"><li>Material Fabrication</li><li>NIR Laser Systems</li><li>Experimental Testing</li><li>Motion Analysis</li></ul>
+        <div class="project-actions">
+          <span class="project-cta" aria-hidden="true">View project<svg><use href="#i-arrow"/></svg></span>
+        </div>
+      </div>
+    </article>
 
   </div>
 </section>
 
-<section id="contact">
-  <div class="section-header reveal">
-    <span class="section-num">03</span>
-    <h2 class="section-title">Contact</h2>
-  </div>
-  <div class="contact-inner">
-    <div class="contact-tagline reveal">
-      Let's build<br/><em>something</em><br/>together.
-    </div>
-    <div class="contact-links reveal">
-      <div class="contact-item">
-        <span class="contact-item-label">Email</span>
-        <a class="contact-item-value" href="mailto:emiliomadrigal1999@gmail.com">
-          emiliomadrigal1999@gmail.com
-        </a>
+<!-- ═════════ CONTACT ═════════ -->
+<section class="section contact" id="contact" aria-labelledby="contact-title">
+  <header class="section-head" data-reveal>
+    <span class="section-index">[04]</span>
+    <h2 id="contact-title" class="visually-hidden">Contact</h2>
+    <span class="section-label">Contact</span>
+    <span class="section-rule" aria-hidden="true"></span>
+  </header>
+  <div class="contact-grid">
+    <p class="contact-tagline" data-reveal>Let's build<br/><em>something</em> together.</p>
+    <div class="contact-links" data-reveal>
+      <div class="contact-row">
+        <span class="contact-label">Email</span>
+        <a class="contact-value" href="mailto:emiliomadrigal1999@gmail.com">emiliomadrigal1999@gmail.com</a>
+        <button class="copy-btn" id="copy-email" data-email="emiliomadrigal1999@gmail.com" aria-label="Copy email address">Copy</button>
       </div>
-      <div class="contact-item">
-        <span class="contact-item-label">LinkedIn</span>
-        <a class="contact-item-value" href="https://www.linkedin.com/in/emilio-madrigal-804b69216/" target="_blank" rel="noopener">
-          linkedin.com/in/emilio-madrigal
-        </a>
+      <div class="contact-row">
+        <span class="contact-label">LinkedIn</span>
+        <a class="contact-value" href="https://www.linkedin.com/in/emilio-madrigal-804b69216/" target="_blank" rel="noopener">linkedin.com/in/emilio-madrigal <svg><use href="#i-arrow-ne"/></svg></a>
       </div>
-      <div class="contact-item">
-        <span class="contact-item-label">GitHub</span>
-        <a class="contact-item-value" href="https://github.com/emilio-madrigalm" target="_blank" rel="noopener">
-          github.com/emilio-madrigalm
-        </a>
+      <div class="contact-row">
+        <span class="contact-label">GitHub</span>
+        <a class="contact-value" href="https://github.com/emilio-madrigalm" target="_blank" rel="noopener">github.com/emilio-madrigalm <svg><use href="#i-arrow-ne"/></svg></a>
       </div>
-      <div class="contact-item">
-        <span class="contact-item-label">Location</span>
-        <span class="contact-item-value">Durham, NC — Duke University | Citrus Heights, CA</span>
+      <div class="contact-row">
+        <span class="contact-label">Location</span>
+        <span class="contact-value contact-value--static">Durham, NC — Duke University | Citrus Heights, CA</span>
       </div>
     </div>
   </div>
 </section>
 
-<footer>
-  <span>© 2026 Emilio Madrigal Mendoza</span>
-  <span>ECE — Duke University</span>
+</main>
+
+<!-- ═════════ FOOTER ═════════ -->
+<footer class="footer">
+  <svg class="footer-wave" viewBox="0 0 1200 60" preserveAspectRatio="none" aria-hidden="true">
+    <path id="footer-path" d="M0 30 H1200"/>
+  </svg>
+  <div class="footer-inner">
+    <div class="footer-name">
+      <span>Emilio Madrigal Mendoza</span>
+      <span class="footer-sub">ECE — Duke University</span>
+    </div>
+    <ul class="footer-links">
+      <li><a href="https://github.com/emilio-madrigalm" target="_blank" rel="noopener" aria-label="GitHub"><svg><use href="#i-github"/></svg></a></li>
+      <li><a href="https://www.linkedin.com/in/emilio-madrigal-804b69216/" target="_blank" rel="noopener" aria-label="LinkedIn"><svg><use href="#i-linkedin"/></svg></a></li>
+      <li><a href="mailto:emiliomadrigal1999@gmail.com" aria-label="Email"><svg><use href="#i-mail"/></svg></a></li>
+    </ul>
+    <div class="footer-end">
+      <span>© <span id="year">2026</span></span>
+      <a href="#top" class="to-top">Back to top ↑</a>
+    </div>
+  </div>
 </footer>
 
-<script>
-  const reveals = document.querySelectorAll('.reveal');
-  const observer = new IntersectionObserver((entries) => {
-    entries.forEach((entry, i) => {
-      if (entry.isIntersecting) {
-        setTimeout(() => entry.target.classList.add('visible'), i * 60);
-        observer.unobserve(entry.target);
-      }
-    });
-  }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+<!-- ═════════ PROJECT VIEW (full-screen, deep-linkable: #work/<id>) ═════════ -->
+<dialog class="pv" id="pv" aria-labelledby="pv-title">
+  <div class="pv-bar">
+    <button class="pv-back" data-pv-close><svg><use href="#i-arrow-l"/></svg><span>All projects</span></button>
+    <span class="pv-pos" id="pv-pos" aria-live="polite"></span>
+    <div class="pv-nav">
+      <button class="pv-icon" id="pv-prev" aria-label="Previous project"><svg><use href="#i-arrow-l"/></svg></button>
+      <button class="pv-icon" id="pv-next" aria-label="Next project"><svg><use href="#i-arrow"/></svg></button>
+      <button class="pv-icon" data-pv-close aria-label="Close project"><svg><use href="#i-close"/></svg></button>
+    </div>
+    <span class="pv-progress" aria-hidden="true"><span id="pv-progress"></span></span>
+  </div>
+  <div class="pv-scroll" id="pv-scroll">
+    <article class="pv-content" id="pv-content"></article>
+    <a class="pv-next-card" id="pv-next-card" href="#">
+      <span class="pv-next-label">Next project</span>
+      <span class="pv-next-title" id="pv-next-title"></span>
+      <svg><use href="#i-arrow"/></svg>
+    </a>
+  </div>
+</dialog>
 
-  reveals.forEach(el => observer.observe(el));
-</script>
+<!-- ─────────────────────────────────────────────────────────────────────
+     Project write-ups. Every fact comes from the project's README, source
+     code, figures, or the résumé — nothing is extrapolated.
+     ───────────────────────────────────────────────────────────────────── -->
+
+<template id="case-cochlear">
+  <header class="pv-head">
+    <p class="pv-kicker">01 — Signal Processing</p>
+    <h2 id="pv-title" tabindex="-1">Cochlear Filter-Bank Model</h2>
+    <p class="pv-lede">A discrete-time model of the human cochlea in MATLAB. Sound enters at the base and travels down a cascade of 512 filter sections, each tuned lower than the one before — so every tone peaks at its own place along the membrane, just like the ear's tonotopic map.</p>
+    <dl class="pv-meta">
+      <div><dt>Built with</dt><dd>MATLAB (R2020a+) · IIR filter design · FFT analysis</dd></div>
+      <div><dt>Scale</dt><dd>512 sections · 3.5 cm membrane · f<sub>s</sub> = 16 kHz</dd></div>
+      <div><dt>Source</dt><dd><a href="https://github.com/emilio-madrigalm/cochlear-model" target="_blank" rel="noopener">emilio-madrigalm/cochlear-model ↗</a></dd></div>
+    </dl>
+  </header>
+  <figure class="pv-hero pv-hero--dark"><img src="img/cochlear-travelling-wave.png" alt="Travelling-wave envelope: 16 instants superimposed for a 1 kHz tone, pressure and displacement after two differentiations"/><figcaption>16 instants of a 1 kHz tone superimposed — the envelope peaks and cuts off sharply at its place.</figcaption></figure>
+  <ul class="pv-metrics">
+    <li><b>512</b><span>cascaded filter sections</span></li>
+    <li><b>~92%</b><span>narrower tuning after 2 differentiations</span></li>
+    <li><b>184 → 14</b><span>sections wide at half-max</span></li>
+    <li><b>~99%</b><span>decay within ~14 ms at tone offset</span></li>
+  </ul>
+  <section class="pv-sec"><h3>Problem</h3><div>
+    <p>Reproduce how the cochlea separates frequencies by <em>place</em>: a travelling wave that builds up as it moves along the membrane and cuts off sharply just past the point tuned to its frequency.</p>
+  </div></section>
+  <section class="pv-sec"><h3>Approach &amp; implementation</h3><div>
+    <p>Section <i>m</i> is tuned to <code>fp = 7500 · 10^(−0.667x)</code> Hz along the 3.5 cm membrane — about 7.5 kHz at the base down to 35 Hz at the apex. Each section has two second-order filters:</p>
+    <ol class="flow">
+      <li><b>Input</b><span>sound at the base</span></li>
+      <li class="flow-hot"><b>Resonator</b><span>pole pair, Q = 8 → displacement</span></li>
+      <li class="flow-hot"><b>Notch</b><span>zero pair, Q = 16 → pressure out</span></li>
+      <li><b>Next section</b><span>× 512, each tuned lower</span></li>
+      <li><b>Spatial diff. ×2</b><span>e<sub>m</sub> = d<sub>m</sub> − d<sub>m+1</sub></span></li>
+    </ol>
+    <p>Pole and zero radii come from the bandwidth (<code>r = 1 − π·BW/fs</code>) and angles from the centre frequency (<code>θ = 2πf/fs</code>); both filters are normalised to unity gain at DC. Differencing neighbouring sections twice suppresses the slow low-frequency tail — a simple model of the extra sharpening the ear gets from outer hair cells.</p>
+  </div></section>
+  <section class="pv-sec"><h3>Challenges &amp; solutions</h3><div>
+    <ol class="pv-cs">
+      <li><p class="pv-c">A wave has to physically travel and accumulate delay, like the real cochlea.</p><p class="pv-s">A <b>cascade, not a parallel bank</b>: each section's input is the previous section's output.</p></li>
+      <li><p class="pv-c">Steep high-frequency cutoff without killing the passband.</p><p class="pv-s">Made the notch <b>twice as narrow</b> as the resonator: Q<sub>z</sub> = 2·Q<sub>p</sub>.</p></li>
+      <li><p class="pv-c">Energy kept propagating past the place it should stop.</p><p class="pv-s">Placed each zero at <b>0.985× the previous section's resonance</b>, so energy stops right after it peaks.</p></li>
+      <li><p class="pv-c">Apex sections ring for thousands of samples, corrupting the FFT.</p><p class="pv-s">Used a <b>1-second impulse</b> so low-frequency sections decay before the transform.</p></li>
+      <li><p class="pv-c">Raw displacement was broad — ~184 sections at half-max.</p><p class="pv-s"><b>Two stages of spatial differentiation</b> narrowed it to ~14 sections and moved the peak to ~186, next to section 192 (1.01 kHz).</p></li>
+    </ol>
+  </div></section>
+  <section class="pv-sec"><h3>Results &amp; takeaways</h3><div>
+    <table class="pv-table">
+      <thead><tr><th></th><th>Peak section</th><th>Width at half-max</th></tr></thead>
+      <tbody><tr><td>Raw displacement</td><td>~133</td><td>~184 sections</td></tr><tr><td>After two differentiations</td><td>~186</td><td>~14 sections</td></tr></tbody>
+    </table>
+    <ul class="pv-list">
+      <li><b>Spectrum analyser in space:</b> a 300 Hz + 1 kHz + 4 kHz mixture separates into three peaks at sections ~54, ~186 and ~301, each near the section tuned to that frequency.</li>
+      <li><b>Full coverage:</b> ten sections from base to apex span the range; differentiation turns each broad low-pass response into a sharp band-pass one.</li>
+      <li><b>Tracks change over time:</b> switching off the 1 kHz tone decays its place by ~99% within ~14 ms (~220 samples) while the 300 Hz and 4 kHz places are unaffected.</li>
+    </ul>
+  </div></section>
+  <section class="pv-sec"><h3>Figures</h3><div>
+    <div class="pv-gallery pv-gallery--dark">
+      <figure><img src="img/cochlear-magnitude-response-1khz.png" loading="lazy" alt="FFT magnitude response of section 192 before and after spatial differentiation"/><figcaption>Section 192: low-pass → band-pass</figcaption></figure>
+      <figure><img src="img/cochlear-three-tone-separation.png" loading="lazy" alt="Three-tone input before and after one and two stages of spatial differentiation"/><figcaption>Three-tone separation</figcaption></figure>
+      <figure><img src="img/cochlear-filterbank-responses.png" loading="lazy" alt="Magnitude responses of ten sections from base to apex"/><figcaption>Filter-bank coverage</figcaption></figure>
+      <figure><img src="img/cochlear-tone-offset-response.png" loading="lazy" alt="Response at each tone's place when the 1 kHz tone switches off"/><figcaption>Tone offset at sample 1500</figcaption></figure>
+      <figure><img src="img/cochlear-impulse-responses.png" loading="lazy" alt="Impulse responses at a high, middle and low-frequency section"/><figcaption>Impulse responses</figcaption></figure>
+      <figure><img src="img/cochlear-tone-snapshot-1khz.png" loading="lazy" alt="Membrane displacement at one instant for a 1 kHz tone"/><figcaption>Displacement snapshot</figcaption></figure>
+    </div>
+  </div></section>
+</template>
+
+<template id="case-esp32">
+  <header class="pv-head">
+    <p class="pv-kicker">02 — Embedded Systems · Personal project</p>
+    <h2 id="pv-title" tabindex="-1">ESP32 Open-Loop DC Motor Speed Controller</h2>
+    <p class="pv-lede">A PWM-based DC motor speed controller on the ESP32 with potentiometer input, live OLED telemetry, and two-way Bluetooth control with an automatic failsafe.</p>
+    <dl class="pv-meta">
+      <div><dt>Built with</dt><dd>ESP32 WROOM-32 · C++ (Arduino IDE 2.x) · L298N · SSD1306 · BluetoothSerial</dd></div>
+      <div><dt>Context</dt><dd>Personal project</dd></div>
+      <div><dt>Source</dt><dd><a href="https://github.com/emilio-madrigalm/esp32-motor-controller" target="_blank" rel="noopener">emilio-madrigalm/esp32-motor-controller ↗</a></dd></div>
+    </dl>
+  </header>
+  <figure class="pv-hero pv-hero--video">
+    <video controls muted playsinline preload="none" poster="img/esp32-demo-poster.jpg" data-src="img/esp32-demo.mp4" aria-label="Demo video of the motor controller running, with speed commands sent from a phone"></video>
+    <figcaption>Demo: the motor driven through the L298N while speed commands arrive from a phone over Bluetooth Serial.</figcaption>
+  </figure>
+  <ul class="pv-metrics">
+    <li><b>~2600</b><span>real ADC ceiling (of 4095 nominal)</span></li>
+    <li><b>1 kHz · 8-bit</b><span>PWM on GPIO2</span></li>
+    <li><b>10</b><span>samples averaged per reading</span></li>
+    <li><b>3 s</b><span>Bluetooth failsafe timeout</span></li>
+  </ul>
+  <section class="pv-sec"><h3>Problem</h3><div>
+    <p>Control the speed of a 12 V DC gear motor from an analog knob, show what the controller is doing in real time, and allow a phone to override it — without ever losing local control if the phone disconnects.</p>
+    <p>The project was first planned as a closed-loop PID controller with encoder feedback. The motor (CQRobot 70:1 12 V gear motor) has no encoder, so the scope was revised to open-loop control.</p>
+  </div></section>
+  <section class="pv-sec"><h3>Approach &amp; implementation</h3><div>
+    <ol class="flow">
+      <li><b>10 kΩ pot</b><span>GPIO34 · ADC</span></li>
+      <li class="flow-hot"><b>ESP32</b><span>avg 10 samples → map → PWM</span></li>
+      <li><b>L298N</b><span>ENA ← GPIO2 · IN1/IN2 ← GPIO4/0</span></li>
+      <li><b>12 V gear motor</b><span>70:1 · no encoder</span></li>
+    </ol>
+    <p>Each loop reads the smoothed potentiometer value, maps it to an 8-bit duty cycle, and writes it with <code>ledcWrite</code> at 1 kHz. The SSD1306 OLED (I²C on GPIO21/22, address <code>0x3C</code>) shows the ADC value, PWM value, speed % and the active source — <code>[POT]</code> or <code>[BT]</code>. The 12 V adapter powers only the L298N; the ESP32 runs from USB, with a common ground between all three.</p>
+    <div class="pv-state" aria-label="Control source state machine">
+      <span class="pv-state-node">POT</span>
+      <span class="pv-state-edges"><span>“S&lt;0–255&gt;” received →</span><span>← no command for 3000 ms</span></span>
+      <span class="pv-state-node pv-state-node--hot">BT</span>
+    </div>
+  </div></section>
+  <section class="pv-sec"><h3>Challenges &amp; solutions</h3><div>
+    <ol class="pv-cs">
+      <li><p class="pv-c">The ESP32's ADC tops out around <b>2600</b> on this hardware, not its theoretical 4095 — so a mapping over 0–4095 could never reach full duty at the top of the knob's travel.</p><p class="pv-s">Measured the real ceiling, recalibrated the mapping to <code>map(adc, 0, 2600, 0, 255)</code> and added <code>constrain()</code> to clamp overshoot — eliminating the discontinuity at high duty cycle.</p></li>
+      <li><p class="pv-c">Noisy potentiometer readings.</p><p class="pv-s">Averaged <b>10 samples</b> per reading.</p></li>
+      <li><p class="pv-c">Remote override without risking a runaway motor if the phone drops.</p><p class="pv-s">A custom <code>S&lt;value&gt;</code> command protocol over classic Bluetooth SPP, acknowledged with <code>OK PWM=…</code>, plus a <b>3-second timeout</b> that reverts control to the potentiometer.</p></li>
+      <li><p class="pv-c">No encoder on the motor, so no feedback for PID.</p><p class="pv-s">Rescoped to open-loop and documented closed-loop PID as future work once an encoder is added.</p></li>
+    </ol>
+    <figure class="pv-chart">
+      <svg viewBox="0 0 560 290" role="img" aria-label="PWM output versus ADC reading. Mapping over the nominal 0 to 4095 range tops out at PWM 162 because the ADC never exceeds about 2600; the calibrated mapping reaches 255 at 2600 and is clamped.">
+        <g class="ch-grid"><path d="M60 30 H540 M60 90 H540 M60 150 H540 M60 210 H540"/></g>
+        <rect x="364" y="30" width="176" height="210" class="ch-dead"/>
+        <text x="452" y="216" class="ch-dead-label">ADC never reaches</text><text x="452" y="230" class="ch-dead-label">this range</text>
+        <path d="M60 240 V30 M60 240 H540" class="ch-axis"/>
+        <path d="M60 240 L364 107" class="ch-naive"/><path d="M364 107 L540 30" class="ch-naive ch-naive--ghost"/>
+        <path d="M60 240 L364 30 H540" class="ch-cal"/>
+        <circle cx="364" cy="107" r="3.5" class="ch-naive-dot"/><text x="372" y="122" class="ch-naive-label">PWM ≈ 162 max (63%)</text>
+        <circle cx="364" cy="30" r="3.5" class="ch-cal-dot"/>
+        <text x="80" y="54" class="ch-cal-label">calibrated: map(adc, 0, 2600, 0, 255) + constrain</text>
+        <text x="180" y="196" class="ch-naive-label">nominal: map(adc, 0, 4095, 0, 255)</text>
+        <g class="ch-ticks"><text x="60" y="258">0</text><text x="364" y="258">2600</text><text x="540" y="258">4095</text><text x="48" y="244" class="r">0</text><text x="48" y="34" class="r">255</text></g>
+        <text x="300" y="282" class="ch-title">ADC reading</text><text x="18" y="140" class="ch-title" transform="rotate(-90 18 140)">PWM duty (8-bit)</text>
+      </svg>
+      <figcaption>Why the calibration mattered: with the nominal 0–4095 mapping, the real ADC ceiling caps output at ~63% duty.</figcaption>
+    </figure>
+  </div></section>
+  <section class="pv-sec"><h3>Results &amp; takeaways</h3><div>
+    <ul class="pv-list">
+      <li><b>Full duty-cycle range</b> available from the potentiometer after calibrating to the measured ADC ceiling.</li>
+      <li><b>Two control sources, one safe default:</b> Bluetooth commands take over instantly and the controller falls back to the knob 3 s after the phone goes quiet.</li>
+      <li><b>Next:</b> add an encoder for closed-loop PID, rewrite for BLE (classic SPP isn't available to third-party iOS apps), and a Wi-Fi web dashboard.</li>
+    </ul>
+  </div></section>
+  <section class="pv-sec"><h3>Build photos</h3><div>
+    <div class="pv-gallery">
+      <figure><img src="img/esp32-overhead-1.jpg" loading="lazy" alt="Overhead view of the full build with phone terminal"/><figcaption>Full build, phone terminal connected</figcaption></figure>
+      <figure><img src="img/esp32-overhead-2.jpg" loading="lazy" alt="Overhead view of the build while running"/><figcaption>Running under Bluetooth control</figcaption></figure>
+      <figure><img src="img/esp32-breadboard.jpg" loading="lazy" alt="ESP32, L298N and wiring on the breadboard"/><figcaption>Breadboard wiring</figcaption></figure>
+    </div>
+  </div></section>
+</template>
+
+<template id="case-forage">
+  <header class="pv-head">
+    <p class="pv-kicker">03 — Hackathon · HackDuke 2026</p>
+    <h2 id="pv-title" tabindex="-1">Forage — Gamified Nature Exploration App</h2>
+    <p class="pv-lede">A full-stack mobile app built in 24 hours: photograph plants and animals, let AI identify them, and earn points for exploring outdoors.</p>
+    <dl class="pv-meta">
+      <div><dt>Built with</dt><dd>React Native · Expo · TypeScript · Supabase PostgreSQL · Auth0 · OpenAI GPT-4o</dd></div>
+      <div><dt>Context</dt><dd>HackDuke 2026 · 24 hours</dd></div>
+    </dl>
+  </header>
+  <div class="pv-phones">
+    <img src="img/forage-modes.jpg" alt="Mode picker: Discovery, Expedition, Live Expedition"/>
+    <img src="img/forage-identifying.jpg" alt="AI identifying a species"/>
+    <img src="img/forage-species-card.jpg" alt="Species fact card for American Beech"/>
+    <img src="img/forage-leaderboard.jpg" alt="Leaderboard"/>
+  </div>
+  <ul class="pv-metrics">
+    <li><b>24 h</b><span>hackathon build window</span></li>
+    <li><b>3</b><span>modes: Discovery, Expedition, Live</span></li>
+    <li><b>GPT-4o</b><span>Vision species identification</span></li>
+    <li><b>PKCE</b><span>Auth0 authentication flow</span></li>
+  </ul>
+  <section class="pv-sec"><h3>Problem</h3><div>
+    <p>Make getting outside and learning about local species feel rewarding — identify what you find, learn something about it, and give people a reason to keep exploring.</p>
+  </div></section>
+  <section class="pv-sec"><h3>Approach &amp; implementation</h3><div>
+    <ol class="flow">
+      <li><b>Photo</b><span>React Native · Expo</span></li>
+      <li class="flow-hot"><b>GPT-4o Vision</b><span>identify species</span></li>
+      <li><b>Fact card</b><span>habitat · ecology · conservation</span></li>
+      <li><b>Points engine</b><span>bonuses · badges</span></li>
+      <li><b>Supabase</b><span>PostgreSQL backend</span></li>
+    </ol>
+    <p>Users sign in with Auth0 (PKCE), choose a mode — <b>Discovery</b> for a single sighting, <b>Expedition</b> to log a hike, or <b>Live Expedition</b> to track one in real time — and every identification feeds the leaderboard and their profile.</p>
+  </div></section>
+  <section class="pv-sec"><h3>Design decisions</h3><div>
+    <ol class="pv-cs">
+      <li><p class="pv-c">Identifying arbitrary species from a phone photo.</p><p class="pv-s">GPT-4o Vision identifies the species and auto-generates the fact card in the same step.</p></li>
+      <li><p class="pv-c">Keeping the game fair and interesting.</p><p class="pv-s">A points engine with <b>diminishing returns</b>, <b>rare-species bonuses</b> and <b>badge awards</b>.</p></li>
+      <li><p class="pv-c">Secure sign-in on a mobile client.</p><p class="pv-s">Auth0 with the <b>PKCE</b> flow, backed by Supabase PostgreSQL.</p></li>
+    </ol>
+  </div></section>
+  <section class="pv-sec"><h3>Screens</h3><div>
+    <div class="pv-gallery pv-gallery--phones">
+      <figure><img src="img/forage-discovery.jpg" loading="lazy" alt="Discovery screen"/></figure>
+      <figure><img src="img/forage-expedition.jpg" loading="lazy" alt="Expedition screen"/></figure>
+      <figure><img src="img/forage-species-magnolia.jpg" loading="lazy" alt="Species fact card for a magnolia"/></figure>
+      <figure><img src="img/forage-profile.jpg" loading="lazy" alt="User profile with badges"/></figure>
+    </div>
+  </div></section>
+</template>
+
+<template id="case-cxbot">
+  <header class="pv-head">
+    <p class="pv-kicker">04 — Robotics · Duke, Electric Circuits</p>
+    <h2 id="pv-title" tabindex="-1">Autonomous CX-Bot</h2>
+    <p class="pv-lede">An autonomous embedded system for the Blue Devil Grand Prix: an Arduino robot that navigates a track with QTI line sensors and coordinates with peer robots over XBee wireless.</p>
+    <dl class="pv-meta">
+      <div><dt>Built with</dt><dd>Arduino · C++ · QTI line sensors · XBee · character LCD</dd></div>
+      <div><dt>Context</dt><dd>Blue Devil Grand Prix — Integrated Design, Duke · 5-person team</dd></div>
+    </dl>
+  </header>
+  <div class="pv-triptych">
+    <img src="img/cx-bot-track.jpg" alt="CX-Bot on the line-following track"/>
+    <img src="img/cx-bot-close.jpg" alt="Close-up of the CX-Bot electronics"/>
+    <img src="img/cx-bot-lcd.jpg" alt="CX-Bot with its on-board LCD displaying values"/>
+  </div>
+  <ul class="pv-metrics">
+    <li><b>5</b><span>person team · led integration testing</span></li>
+    <li><b>3</b><span>critical XBee timing bugs diagnosed</span></li>
+    <li><b>2 of 5</b><span>earlier test runs failed from those bugs</span></li>
+  </ul>
+  <section class="pv-sec"><h3>Problem</h3><div>
+    <p>Each robot had to navigate the course on its own and exchange data with the other robots over XBee — so a robot's success depended not just on its own sensing, but on a shared wireless protocol working reliably.</p>
+  </div></section>
+  <section class="pv-sec"><h3>Approach &amp; implementation</h3><div>
+    <ol class="flow">
+      <li><b>QTI sensors</b><span>line detection</span></li>
+      <li class="flow-hot"><b>Arduino · C++</b><span>sensor-fusion logic</span></li>
+      <li><b>Navigation</b><span>follow the track</span></li>
+      <li class="flow-hot"><b>XBee</b><span>data exchange with peer units</span></li>
+    </ol>
+    <p>I programmed the robot's navigation and sensor-fusion logic in C++ and implemented the inter-unit communication protocol over XBee. An on-board character LCD displays values during runs.</p>
+  </div></section>
+  <section class="pv-sec"><h3>Challenges &amp; solutions</h3><div>
+    <ol class="pv-cs">
+      <li><p class="pv-c">Navigation failed in <b>2 of 5</b> test runs.</p><p class="pv-s">Led integration testing across the 5-person team and traced the failures to <b>3 critical timing bugs</b> in the XBee data-exchange protocol.</p></li>
+    </ol>
+  </div></section>
+  <section class="pv-sec"><h3>Takeaway</h3><div>
+    <ul class="pv-list">
+      <li>In a multi-robot system, timing in the communication layer can be the root cause of failures that look like navigation problems — integration testing across the whole team is what surfaced them.</li>
+    </ul>
+  </div></section>
+</template>
+
+<template id="case-cpu">
+  <header class="pv-head">
+    <p class="pv-kicker">05 — Digital Logic · Duke, Computer Architecture</p>
+    <h2 id="pv-title" tabindex="-1">16-bit RISC CPU</h2>
+    <p class="pv-lede">A complete single-cycle 16-bit RISC processor designed in Logisim — from a custom instruction set up through a modular datapath and control — and verified by running real programs.</p>
+    <dl class="pv-meta">
+      <div><dt>Built with</dt><dd>Logisim Evolution · Assembly</dd></div>
+      <div><dt>Context</dt><dd>Duke University — Computer Architecture</dd></div>
+    </dl>
+  </header>
+  <figure class="pv-hero pv-hero--light"><img src="img/cpu.png" alt="Full Logisim schematic of the 16-bit RISC processor"/><figcaption>The full processor in Logisim. Open the image to zoom.</figcaption></figure>
+  <ul class="pv-metrics">
+    <li><b>16-bit</b><span>single-cycle RISC</span></li>
+    <li><b>Harvard</b><span>separate instruction &amp; data memory</span></li>
+    <li><b>4</b><span>op classes: arithmetic, logic, memory, control</span></li>
+    <li><b>2</b><span>test programs: Fibonacci · primes</span></li>
+  </ul>
+  <section class="pv-sec"><h3>Problem</h3><div>
+    <p>Design a working processor from scratch: define the instruction set, build every block of the datapath and control, and prove it executes real programs correctly.</p>
+  </div></section>
+  <section class="pv-sec"><h3>Approach &amp; implementation</h3><div>
+    <p>A modular single-cycle datapath — program counter, instruction ROM and decoder, control unit, register file, ALU, left/right barrel shifters and data RAM — with full instruction-set coverage across arithmetic, logic, memory and control operations.</p>
+    <div class="pv-diagram"><svg class="datapath" viewBox="0 0 640 300" role="img" aria-label="Simplified single-cycle datapath: program counter, instruction ROM, decoder and control, register file, ALU and barrel shifters, data RAM, and keyboard/TTY I/O">
+          <defs><marker id="dp-arrow" viewBox="0 0 8 8" refX="7" refY="4" markerWidth="7" markerHeight="7" orient="auto"><path d="M0 0 8 4 0 8z" fill="currentColor"/></marker></defs>
+          <g class="dp-wires" marker-end="url(#dp-arrow)">
+            <path d="M92 70 H124"/><path d="M224 70 H256"/><path d="M306 92 V150"/><path d="M356 70 H392"/>
+            <path d="M492 70 H520"/><path d="M588 92 V186 H520"/><path d="M420 186 H392"/><path d="M306 172 V230 H256"/>
+            <path d="M156 230 H124 V214"/><path d="M60 214 V92"/>
+          </g>
+          <g class="dp-blocks">
+            <rect x="20" y="48" width="72" height="44"/><text x="56" y="75">PC</text>
+            <rect x="124" y="48" width="100" height="44"/><text x="174" y="68">Instr.</text><text x="174" y="84" class="dp-sub">ROM 64K×16</text>
+            <rect x="256" y="48" width="100" height="44"/><text x="306" y="75">Decoder</text>
+            <rect x="392" y="48" width="100" height="44" class="dp-hot"/><text x="442" y="68">Register</text><text x="442" y="84" class="dp-sub">File</text>
+            <rect x="520" y="48" width="100" height="44" class="dp-hot"/><text x="570" y="75">ALU</text>
+            <rect x="256" y="150" width="100" height="44"/><text x="306" y="177">Control</text>
+            <rect x="420" y="164" width="100" height="44"/><text x="470" y="184">Barrel</text><text x="470" y="200" class="dp-sub">Shifters L/R</text>
+            <rect x="156" y="208" width="100" height="44"/><text x="206" y="228">Data</text><text x="206" y="244" class="dp-sub">RAM 64K×16</text>
+            <rect x="20" y="170" width="92" height="44" class="dp-io"/><text x="66" y="190">Keyboard</text><text x="66" y="206" class="dp-sub">in · TTY out</text>
+          </g>
+          <text x="20" y="284" class="dp-note">HARVARD · SEPARATE INSTRUCTION / DATA MEMORY · SINGLE-CYCLE</text>
+        </svg></div>
+  </div></section>
+  <section class="pv-sec"><h3>Challenges &amp; solutions</h3><div>
+    <ol class="pv-cs">
+      <li><p class="pv-c">Instruction fetches and data accesses competing for the same memory path.</p><p class="pv-s">A <b>Harvard architecture</b> with separate instruction and data memory paths, eliminating bus conflicts.</p></li>
+      <li><p class="pv-c">Slow debugging when every check means reading register values by hand.</p><p class="pv-s">Integrated <b>keyboard input and TTY output</b> for interactive testing with real-time feedback from running assembly.</p></li>
+    </ol>
+  </div></section>
+  <section class="pv-sec"><h3>Results</h3><div>
+    <ul class="pv-list">
+      <li><b>Verified in simulation:</b> hand-written assembly programs for Fibonacci generation and prime generation executed correctly.</li>
+    </ul>
+  </div></section>
+</template>
+
+<template id="case-route">
+  <header class="pv-head">
+    <p class="pv-kicker">06 — Algorithms · Java</p>
+    <h2 id="pv-title" tabindex="-1">Highway Route Finder</h2>
+    <p class="pv-lede">Shortest-path routing between U.S. cities over a large highway graph, timed and drawn on a map.</p>
+    <dl class="pv-meta">
+      <div><dt>Built with</dt><dd>Java · OOP · Dijkstra + priority queue · StdDraw visualisation</dd></div>
+    </dl>
+  </header>
+  <figure class="pv-hero"><img src="img/route-map.jpg" alt="Route from Las Vegas NV to Durham NC drawn on a US map"/><figcaption>Las Vegas, NV → Durham, NC across the highway graph.</figcaption></figure>
+  <ul class="pv-metrics">
+    <li><b>O(E log V)</b><span>Dijkstra with a priority queue</span></li>
+    <li><b>CSV</b><span>town, state, latitude, longitude</span></li>
+    <li><b>ns timer</b><span>search timed with System.nanoTime</span></li>
+  </ul>
+  <section class="pv-sec"><h3>Problem</h3><div>
+    <p>Find and visualise the shortest highway route between any two U.S. cities, fast enough to work over a large road network.</p>
+  </div></section>
+  <section class="pv-sec"><h3>Approach &amp; implementation</h3><div>
+    <ol class="flow">
+      <li><b>uscities.csv</b><span>readData()</span></li>
+      <li><b>Map&lt;String, Point&gt;</b><span>"Durham NC" → coords</span></li>
+      <li><b>nearestPoint()</b><span>snap to graph vertex</span></li>
+      <li class="flow-hot"><b>Dijkstra + PQ</b><span>GraphProcessor.route()</span></li>
+      <li><b>drawRoute()</b><span>length · points · time</span></li>
+    </ol>
+    <p>The road network is a weighted graph. <code>GraphProcessor</code> owns the routing logic, <code>GraphDemo</code> handles data I/O and user interaction, and a visualiser draws the result — a clean separation between algorithm and I/O.</p>
+  </div></section>
+  <section class="pv-sec"><h3>Challenges &amp; solutions</h3><div>
+    <ol class="pv-cs">
+      <li><p class="pv-c">Cities in the dataset aren't vertices of the highway graph.</p><p class="pv-s">Look up each city's coordinates, then <b>snap to the nearest graph point</b> before routing.</p></li>
+      <li><p class="pv-c">Large graph — routing must stay fast.</p><p class="pv-s">A <b>priority queue</b> gives O(E log V); the search is timed with <code>System.nanoTime()</code> and reported.</p></li>
+    </ol>
+  </div></section>
+  <section class="pv-sec"><h3>Code</h3><div>
+    <div class="pv-gallery">
+      <figure><img src="img/route-code.png" loading="lazy" alt="GraphDemo.java: data loading code"/><figcaption>Loading cities from CSV</figcaption></figure>
+      <figure><img src="img/route-output-1.png" loading="lazy" alt="GraphDemo.java: showRoute timing the search and printing results"/><figcaption>Timed routing &amp; output</figcaption></figure>
+      <figure><img src="img/route-output-2.png" loading="lazy" alt="GraphDemo.java: city selection and nearest-point lookup"/><figcaption>City selection &amp; snapping</figcaption></figure>
+    </div>
+  </div></section>
+</template>
+
+<template id="case-mxene">
+  <header class="pv-head">
+    <p class="pv-kicker">07 — Microrobotics · Research, Duke</p>
+    <h2 id="pv-title" tabindex="-1">MXene Vapor-Propelled Microrobot</h2>
+    <p class="pv-lede">Research into MXene-based flying robotics enabled by vapor propulsion — fabricating light-driven microrobots and understanding how they achieve controllable rotational flight.</p>
+    <dl class="pv-meta">
+      <div><dt>Methods</dt><dd>Material fabrication · NIR laser systems · optical &amp; motion analysis</dd></div>
+      <div><dt>Context</dt><dd>Research, Duke University · January 2026 — present</dd></div>
+    </dl>
+  </header>
+  <section class="pv-sec"><h3>Question</h3><div>
+    <p>What mechanism produces controllable rotational flight in an untethered, laser-driven microrobot — and how can it be tuned for thrust and stability?</p>
+  </div></section>
+  <section class="pv-sec"><h3>Approach</h3><div>
+    <ol class="flow">
+      <li><b>Fabricate</b><span>Ti₃C₂Tₓ MXene–agar films</span></li>
+      <li class="flow-hot"><b>NIR laser</b><span>irradiation drives propulsion</span></li>
+      <li><b>Vapor jetting</b><span>asymmetric, downward</span></li>
+      <li><b>Characterize</b><span>optical &amp; motion analysis</span></li>
+    </ol>
+    <p>I fabricate Ti₃C₂Tₓ MXene–agar composite films, develop laser-driven propulsion systems, and design and test propulsion mechanisms under NIR irradiation.</p>
+  </div></section>
+  <section class="pv-sec"><h3>Findings &amp; ongoing work</h3><div>
+    <ul class="pv-list">
+      <li><b>Mechanism identified:</b> asymmetric downward vapor jetting is the control method for rotational flight, with stability confirmed through systematic experimental testing.</li>
+      <li><b>Ongoing:</b> optimizing material composition and NIR laser parameters to improve thrust efficiency and flight stability, characterized with optical and motion analysis instruments.</li>
+    </ul>
+    <p class="pv-note">Research is ongoing, so images and data aren't published here yet.</p>
+  </div></section>
+</template>
+
 </body>
 </html>
