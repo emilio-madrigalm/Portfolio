@@ -306,6 +306,12 @@
     padding: 12px;
   }
 
+  .project-img-slot img.contain-dark {
+    object-fit: contain;
+    background: #141414;
+    padding: 10px;
+  }
+
   .project-img-link:hover .project-img-slot img { transform: scale(1.04); }
 
   .project-img-gallery {
@@ -601,6 +607,7 @@
           <span class="tag">C / C++</span>
           <span class="tag">Java</span>
           <span class="tag">Assembly</span>
+          <span class="tag">MATLAB</span>
           <span class="tag">Logisim</span>
           <span class="tag">Arduino</span>
           <span class="tag">NIR Laser Systems</span>
@@ -677,7 +684,7 @@
           <span class="project-domain">Embedded Systems</span>
         </div>
         <h3 class="project-title">
-          <a class="project-title-link" href="https://github.com/Sufty1/esp32-motor-controller" target="_blank" rel="noopener">ESP32 Open-Loop DC Motor Speed Controller</a>
+          <a class="project-title-link" href="https://github.com/emilio-madrigalm/esp32-motor-controller" target="_blank" rel="noopener">ESP32 Open-Loop DC Motor Speed Controller</a>
         </h3>
         <p class="project-desc">
           Diagnosed and corrected ESP32 ADC non-linearity — recalibrated the PWM duty-cycle
@@ -692,7 +699,7 @@
           <span class="tool-chip">SSD1306 OLED</span>
           <span class="tool-chip">Bluetooth SPP</span>
         </div>
-        <a class="project-link" href="https://github.com/Sufty1/esp32-motor-controller" target="_blank" rel="noopener">View on GitHub →</a>
+        <a class="project-link" href="https://github.com/emilio-madrigalm/esp32-motor-controller" target="_blank" rel="noopener">View on GitHub →</a>
       </div>
     </div>
 
@@ -749,6 +756,38 @@
       </div>
     </div>
 
+    <div class="project-card reveal">
+      <a class="project-img-link" href="./cochlear-model/cochlear-travelling-wave.png" target="_blank" rel="noopener" aria-label="View cochlear model travelling-wave plot">
+        <div class="project-img-slot">
+          <img class="contain-dark" src="./cochlear-model/cochlear-travelling-wave.png" alt="Travelling-wave envelope of a 1 kHz tone along the 512-section cochlear model, before and after spatial differentiation"/>
+        </div>
+      </a>
+      <div class="project-card-body">
+        <div class="project-card-top">
+          <span class="project-num">006</span>
+          <span class="project-domain">Signal Processing</span>
+        </div>
+        <h3 class="project-title">
+          <a class="project-title-link" href="https://github.com/emilio-madrigalm/cochlear-model" target="_blank" rel="noopener">Cochlear Filter-Bank Model</a>
+        </h3>
+        <p class="project-desc">
+          Modeled the human cochlea in MATLAB as a cascade of 512 second-order IIR sections,
+          each a pole-pair resonator and zero-pair notch, mapped tonotopically from 7.5 kHz
+          down to 35 Hz. Two stages of spatial differentiation narrowed the response to a
+          1 kHz tone by ~92%. Validated the model as a spectrum analyser in space: a
+          300 Hz / 1 kHz / 4 kHz mixture resolved into three distinct peaks, and a switched-off
+          tone decayed ~99% within 14 ms.
+        </p>
+        <div class="project-tools">
+          <span class="tool-chip">MATLAB</span>
+          <span class="tool-chip">IIR Filter Design</span>
+          <span class="tool-chip">DSP</span>
+          <span class="tool-chip">FFT Analysis</span>
+        </div>
+        <a class="project-link" href="https://github.com/emilio-madrigalm/cochlear-model" target="_blank" rel="noopener">View on GitHub →</a>
+      </div>
+    </div>
+
     <div class="project-card full-width reveal">
       <div class="project-img-gallery">
         <a class="project-img-link" href="./hackathon/forage-identifying.png" target="_blank" rel="noopener" aria-label="Forage app — AI identifying species">
@@ -763,7 +802,7 @@
       </div>
       <div class="project-card-body">
         <div class="project-card-top">
-          <span class="project-num">006</span>
+          <span class="project-num">007</span>
           <span class="project-domain">Hackathon</span>
         </div>
         <h3 class="project-title">Forage — Gamified Nature Exploration App</h3>
@@ -813,8 +852,8 @@
       </div>
       <div class="contact-item">
         <span class="contact-item-label">GitHub</span>
-        <a class="contact-item-value" href="https://github.com/Sufty1" target="_blank" rel="noopener">
-          github.com/Sufty1
+        <a class="contact-item-value" href="https://github.com/emilio-madrigalm" target="_blank" rel="noopener">
+          github.com/emilio-madrigalm
         </a>
       </div>
       <div class="contact-item">
