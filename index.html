@@ -230,6 +230,7 @@
         <li><button class="chip" data-used="forage">TypeScript</button></li>
         <li><button class="chip" data-used="cochlear">MATLAB</button></li>
         <li><button class="chip" data-used="cpu">Assembly</button></li>
+        <li><button class="chip" data-used="orderbook">SystemVerilog</button></li>
         <li><button class="chip" data-used="orderbook">Python</button></li>
       </ul>
     </div>
@@ -251,7 +252,7 @@
     <div class="module" data-reveal>
       <div class="module-head"><span class="module-id">MOD-C</span><h3>Engineering &amp; Design</h3></div>
       <ul class="chips">
-        <li><button class="chip" data-used="cpu">Digital Logic Design</button></li>
+        <li><button class="chip" data-used="cpu orderbook">Digital Logic Design</button></li>
         <li><button class="chip" data-used="cpu">ISA &amp; Datapath Design</button></li>
         <li><button class="chip" data-used="cochlear">IIR Filter Design</button></li>
         <li><button class="chip" data-used="cochlear">FFT Analysis</button></li>
@@ -481,9 +482,10 @@
         <p class="project-desc">
           A C++20 matching engine with price-time priority, taken through five benchmarked optimization
           rounds: 2.5× throughput on a small book and 3.4× on a ~208k-order deep book, each round checked
-          against a naive reference book. A Python backtester runs a market maker against its output.
+          against a naive reference book. A Python backtester runs a market maker against its output, and a
+          SystemVerilog parser for the event stream matches the C++ model bit for bit in simulation.
         </p>
-        <ul class="tools"><li>C++20</li><li>CMake · CTest</li><li>Python</li><li>Benchmarking</li><li>GitHub Actions</li></ul>
+        <ul class="tools"><li>C++20</li><li>CMake · CTest</li><li>Python</li><li>SystemVerilog</li><li>Benchmarking</li><li>GitHub Actions</li></ul>
         <div class="project-actions">
           <span class="project-cta" aria-hidden="true">View project<svg><use href="#i-arrow"/></svg></span>
           <a class="link-btn" href="https://github.com/emilio-madrigalm/orderbook-engine" target="_blank" rel="noopener"><svg><use href="#i-github"/></svg>Source</a>
@@ -953,7 +955,7 @@
     <h2 id="pv-title" tabindex="-1">Low-Latency Limit Order Book</h2>
     <p class="pv-lede">A C++20 limit order book with price-time priority matching, tuned over five measured optimization rounds, plus a Python backtester for a market-making strategy that trades against the book's replayed output.</p>
     <dl class="pv-meta">
-      <div><dt>Built with</dt><dd>C++20 · CMake · CTest · ASan/UBSan · Python 3 (stdlib + matplotlib) · GitHub Actions</dd></div>
+      <div><dt>Built with</dt><dd>C++20 · CMake · CTest · ASan/UBSan · Python 3 (stdlib + matplotlib) · SystemVerilog · Icarus Verilog · Verilator · Yosys/nextpnr · GitHub Actions</dd></div>
       <div><dt>Context</dt><dd>Personal project · Linux / WSL2, g++ 13.3</dd></div>
       <div><dt>Source</dt><dd><a href="https://github.com/emilio-madrigalm/orderbook-engine" target="_blank" rel="noopener">emilio-madrigalm/orderbook-engine ↗</a></dd></div>
     </dl>
@@ -963,7 +965,7 @@
     <li><b>3.4×</b><span>throughput, deep book (2.7 → 9.1 M events/s)</span></li>
     <li><b>2.5×</b><span>throughput, small book (9.9 → 24.6 M events/s)</span></li>
     <li><b>2.5 → 1.1 µs</b><span>p99.9 latency, deep book</span></li>
-    <li><b>76 + 69</b><span>C++ and Python tests, CI on every push</span></li>
+    <li><b>84 + 88</b><span>C++ and Python tests, plus FPGA sim, CI on every push</span></li>
   </ul>
   <section class="pv-sec"><h3>Problem</h3><div>
     <p>Build the core of an exchange, an order book that matches limit, market, cancel and modify orders by price then time, and make it fast without breaking it. Then use it as the data source for a backtester that is honest about when a passive order would really have filled.</p>
@@ -986,6 +988,7 @@
       <li><p class="pv-c">Shrinking the order node did nothing on the default workload.</p><p class="pv-s">The book sat in L1. A <b>deep-book profile</b> pushed it out to memory, and there the 56 → 32 byte node gave a real gain.</p></li>
       <li><p class="pv-c">Rare 0.16–1.2 ms latency spikes.</p><p class="pv-s">An <b>empty loop of 100M clock reads</b> showed 2 ms gaps on the same VM, so they come from the WSL2 host; p99.9 is the tail metric.</p></li>
       <li><p class="pv-c">The backtest PnL looked too good.</p><p class="pv-s">Tested <b>conservative fill assumptions</b>: trade-through-only fills, a 0.2-tick fee and 50 µs latency together turn +14,243 ticks into −959.</p></li>
+      <li><p class="pv-c">The FPGA message parser closed timing at only ~114 MHz on an iCE40.</p><p class="pv-s">Turned the price-band check into a <b>bit mask</b> (the band ends at 2<sup>17</sup>−1) and fed the counters from a <b>registered all-ok bit</b> instead of the error encoder: 146–157 MHz post-route.</p></li>
     </ol>
   </div></section>
   <section class="pv-sec"><h3>Results &amp; takeaways</h3><div>
@@ -1003,6 +1006,7 @@
     <ul class="pv-list">
       <li><b>Tail regression found in the write-up:</b> rounds r1–r3 have a worse deep-book p99.9 than the baseline despite higher throughput; it disappears when r4 replaces <code>std::unordered_map</code>, the likely (unconfirmed) cause.</li>
       <li><b>The fill model decides the result:</b> each conservative assumption alone cuts the backtest PnL by half or more. The synthetic flow has no adverse selection, so the PnL tests the plumbing, not the strategy.</li>
+      <li><b>FPGA parser:</b> a 2-stage SystemVerilog decoder/validator for a 32-byte binary form of the events, 1 message per clock. On 100,037 messages (2,000 with a random byte corrupted, 743 of them invalid) its output is identical to the C++ reference model; on a Lattice iCE40 HX8K it uses 670 logic cells (8%) at 146–157 MHz. Synthesis and simulation only: no board, no network I/O.</li>
       <li><b>One command reproduces everything:</b> <code>scripts/run_all.sh</code> builds, runs both test suites, benchmarks, backtests and plots.</li>
     </ul>
     <p class="pv-note">Single-threaded, in-memory, synthetic data. Measured on an Intel Core Ultra 7 155U under WSL2; compare rows within one table, not across sessions.</p>
