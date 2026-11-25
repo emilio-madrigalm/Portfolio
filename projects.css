@@ -12,6 +12,7 @@
 .p-cpu      { grid-column: span 7; }
 .p-route    { grid-column: span 7; }
 .p-mxene    { grid-column: span 5; }
+.p-orderbook { grid-column: span 12; display: grid; grid-template-columns: 1.35fr 1fr; }
 
 /* ── Card ────────────────────────────────────────────────────────── */
 .project {
@@ -115,7 +116,7 @@
   background: radial-gradient(420px circle at var(--mx) var(--my), rgba(110,231,242,.06), transparent 60%);
 }
 .project:hover .project-body::before { opacity: 1; }
-.p-forage .project-body { justify-content: center; padding: 44px 40px; }
+.p-forage .project-body, .p-orderbook .project-body { justify-content: center; padding: 44px 40px; }
 .project-meta { display: flex; align-items: center; gap: 12px; }
 .project-num { color: var(--accent); }
 .project-meta::after { content: ""; order: 1; flex: 0 0 18px; height: 1px; background: var(--line-2); }
@@ -269,6 +270,8 @@
 .pv-gallery img { width: 100%; height: 100%; aspect-ratio: 4 / 3; object-fit: cover; transition: transform 1.2s var(--ease); }
 .pv-gallery--dark figure { background: #141414; }
 .pv-gallery--dark img { object-fit: contain; padding: 10px; }
+.pv-gallery--light figure { background: #F3F3F1; }
+.pv-gallery--light img { object-fit: contain; padding: 10px; }
 .pv-gallery figure:hover img { transform: scale(1.04); }
 .pv-gallery--phones { grid-template-columns: repeat(4, minmax(0, 1fr)); }
 .pv-gallery--phones figure { border: 0; background: none; }
@@ -289,7 +292,7 @@
 /* ── Responsive ──────────────────────────────────────────────────── */
 @media (max-width: 1080px) {
   .p-cochlear, .p-esp32, .p-cxbot, .p-cpu, .p-route, .p-mxene { grid-column: span 6; }
-  .p-forage { grid-template-columns: 1fr; }
+  .p-forage, .p-orderbook { grid-template-columns: 1fr; }
   .media--phones { border-right: 0; border-bottom: 1px solid var(--line); min-height: 0; padding: 40px clamp(20px, 6vw, 72px); }
   .flow { flex-direction: column; }
   .flow li + li { margin: 18px 0 0; }
@@ -307,7 +310,7 @@
   .bento > .project { grid-column: auto; }
   .media--phones { grid-template-columns: repeat(2, minmax(0, 140px)); padding: 28px 20px; }
   .media--phones > img:nth-child(n+3) { display: none; }
-  .project-body, .p-forage .project-body { padding: 22px 20px 20px; }
+  .project-body, .p-forage .project-body, .p-orderbook .project-body { padding: 22px 20px 20px; }
   .pv-bar { gap: 8px; }
   .pv-back span, .pv-pos { display: none; }
   .pv-nav { margin-left: auto; }

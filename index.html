@@ -216,6 +216,7 @@
       <li><a href="#p-cpu" data-project="cpu"><span>05</span>RISC CPU</a></li>
       <li><a href="#p-route" data-project="route"><span>06</span>Route Finder</a></li>
       <li><a href="#p-mxene" data-project="mxene"><span>07</span>MXene</a></li>
+      <li><a href="#p-orderbook" data-project="orderbook"><span>08</span>Order Book</a></li>
     </ol>
     <span class="trace-out" id="trace-out" aria-live="polite">Select a tool</span>
   </div>
@@ -224,12 +225,12 @@
     <div class="module" data-reveal>
       <div class="module-head"><span class="module-id">MOD-A</span><h3>Programming Languages</h3></div>
       <ul class="chips">
-        <li><button class="chip" data-used="esp32 cxbot">C / C++</button></li>
+        <li><button class="chip" data-used="esp32 cxbot orderbook">C / C++</button></li>
         <li><button class="chip" data-used="route">Java</button></li>
         <li><button class="chip" data-used="forage">TypeScript</button></li>
         <li><button class="chip" data-used="cochlear">MATLAB</button></li>
         <li><button class="chip" data-used="cpu">Assembly</button></li>
-        <li><button class="chip" data-used="">Python</button></li>
+        <li><button class="chip" data-used="orderbook">Python</button></li>
       </ul>
     </div>
     <div class="module" data-reveal>
@@ -272,8 +273,8 @@
         <li><button class="chip" data-used="forage">Supabase · PostgreSQL</button></li>
         <li><button class="chip" data-used="forage">Auth0</button></li>
         <li><button class="chip" data-used="forage">OpenAI GPT-4o</button></li>
-        <li><button class="chip" data-used="esp32 cochlear">Git &amp; GitHub</button></li>
-        <li><button class="chip" data-used="">Linux</button></li>
+        <li><button class="chip" data-used="esp32 cochlear orderbook">Git &amp; GitHub</button></li>
+        <li><button class="chip" data-used="orderbook">Linux</button></li>
       </ul>
     </div>
   </div>
@@ -285,7 +286,7 @@
     <span class="section-index">[03]</span>
     <h2 id="projects-title">Selected Work</h2>
     <span class="section-rule" aria-hidden="true"></span>
-    <span class="section-count">07 projects</span>
+    <span class="section-count">08 projects</span>
   </header>
   <p class="section-sub" data-reveal>Open any project for the full story — the problem, how it was built, what broke, and what it measured.</p>
 
@@ -462,6 +463,30 @@
         <ul class="tools"><li>Material Fabrication</li><li>NIR Laser Systems</li><li>Experimental Testing</li><li>Motion Analysis</li></ul>
         <div class="project-actions">
           <span class="project-cta" aria-hidden="true">View project<svg><use href="#i-arrow"/></svg></span>
+        </div>
+      </div>
+    </article>
+
+    <!-- 08 Order Book -->
+    <article class="project p-orderbook" id="p-orderbook" data-reveal>
+      <a class="project-hit" href="#work/orderbook" data-open="orderbook" aria-label="View project: Low-Latency Limit Order Book"></a>
+      <div class="project-media media--light">
+        <img src="img/orderbook-latency.png" width="1350" height="780" loading="lazy" decoding="async"
+             alt="Histogram of per-event latency for the final order book over 1,000,000 events, log scale: p50 34 ns, p99 161 ns, p99.9 340 ns"/>
+        <span class="fig">FIG. 08 · Latency per event</span>
+      </div>
+      <div class="project-body">
+        <div class="project-meta"><span class="project-num">08</span><span class="project-domain">Systems · Personal project</span></div>
+        <h3 class="project-title">Low-Latency Limit Order Book</h3>
+        <p class="project-desc">
+          A C++20 matching engine with price-time priority, taken through five benchmarked optimization
+          rounds: 2.5× throughput on a small book and 3.4× on a ~208k-order deep book, each round checked
+          against a naive reference book. A Python backtester runs a market maker against its output.
+        </p>
+        <ul class="tools"><li>C++20</li><li>CMake · CTest</li><li>Python</li><li>Benchmarking</li><li>GitHub Actions</li></ul>
+        <div class="project-actions">
+          <span class="project-cta" aria-hidden="true">View project<svg><use href="#i-arrow"/></svg></span>
+          <a class="link-btn" href="https://github.com/emilio-madrigalm/orderbook-engine" target="_blank" rel="noopener"><svg><use href="#i-github"/></svg>Source</a>
         </div>
       </div>
     </article>
@@ -919,6 +944,74 @@
       <li><b>Ongoing:</b> optimizing material composition and NIR laser parameters to improve thrust efficiency and flight stability, characterized with optical and motion analysis instruments.</li>
     </ul>
     <p class="pv-note">Research is ongoing, so images and data aren't published here yet.</p>
+  </div></section>
+</template>
+
+<template id="case-orderbook">
+  <header class="pv-head">
+    <p class="pv-kicker">08 — Systems · Personal project</p>
+    <h2 id="pv-title" tabindex="-1">Low-Latency Limit Order Book</h2>
+    <p class="pv-lede">A C++20 limit order book with price-time priority matching, tuned over five measured optimization rounds, plus a Python backtester for a market-making strategy that trades against the book's replayed output.</p>
+    <dl class="pv-meta">
+      <div><dt>Built with</dt><dd>C++20 · CMake · CTest · ASan/UBSan · Python 3 (stdlib + matplotlib) · GitHub Actions</dd></div>
+      <div><dt>Context</dt><dd>Personal project · Linux / WSL2, g++ 13.3</dd></div>
+      <div><dt>Source</dt><dd><a href="https://github.com/emilio-madrigalm/orderbook-engine" target="_blank" rel="noopener">emilio-madrigalm/orderbook-engine ↗</a></dd></div>
+    </dl>
+  </header>
+  <figure class="pv-hero pv-hero--light"><img src="img/orderbook-latency.png" alt="Per-event latency histogram of the final book over 1,000,000 events, log scale, with p50 34 ns, p99 161 ns and p99.9 340 ns marked"/><figcaption>Final book, 1M events: p50 34 ns, p99 161 ns, p99.9 340 ns.</figcaption></figure>
+  <ul class="pv-metrics">
+    <li><b>3.4×</b><span>throughput, deep book (2.7 → 9.1 M events/s)</span></li>
+    <li><b>2.5×</b><span>throughput, small book (9.9 → 24.6 M events/s)</span></li>
+    <li><b>2.5 → 1.1 µs</b><span>p99.9 latency, deep book</span></li>
+    <li><b>76 + 69</b><span>C++ and Python tests, CI on every push</span></li>
+  </ul>
+  <section class="pv-sec"><h3>Problem</h3><div>
+    <p>Build the core of an exchange, an order book that matches limit, market, cancel and modify orders by price then time, and make it fast without breaking it. Then use it as the data source for a backtester that is honest about when a passive order would really have filled.</p>
+  </div></section>
+  <section class="pv-sec"><h3>Approach &amp; implementation</h3><div>
+    <ol class="flow">
+      <li><b>ob_gen</b><span>synthetic order flow → CSV</span></li>
+      <li class="flow-hot"><b>OrderBook</b><span>C++ matching engine</span></li>
+      <li><b>ob_replay</b><span>trades + depth snapshots</span></li>
+      <li class="flow-hot"><b>backtest.py</b><span>latency, queue, fees</span></li>
+      <li><b>strategy.py</b><span>inventory-skewed market maker</span></li>
+    </ol>
+    <p>The baseline (<code>std::map</code> of <code>std::list</code> per side, <code>std::unordered_map</code> id index) was tagged first. A property test replays random streams through the book and through a deliberately naive linear-scan reference book and requires identical trades and depth, so every later rewrite of a core data structure could be checked against it.</p>
+    <p>Each round was benchmarked against the one before on the same stream, and kept only if it measured faster on at least one of two workloads: a default profile whose book fits in L1, and a deep profile with ~208k resting orders.</p>
+  </div></section>
+  <section class="pv-sec"><h3>Challenges &amp; solutions</h3><div>
+    <ol class="pv-cs">
+      <li><p class="pv-c">The laptop's speed drifted by 30% or more between sessions, more than most changes being measured.</p><p class="pv-s">A script rebuilds <b>every round from its own commit</b> and runs them interleaved in one session, rotating the start; only those paired comparisons count.</p></li>
+      <li><p class="pv-c"><code>std::pmr</code>'s pool resource was slower than the default allocator.</p><p class="pv-s">A small <b>hand-written size-class free list</b> was faster than both.</p></li>
+      <li><p class="pv-c">Shrinking the order node did nothing on the default workload.</p><p class="pv-s">The book sat in L1. A <b>deep-book profile</b> pushed it out to memory, and there the 56 → 32 byte node gave a real gain.</p></li>
+      <li><p class="pv-c">Rare 0.16–1.2 ms latency spikes.</p><p class="pv-s">An <b>empty loop of 100M clock reads</b> showed 2 ms gaps on the same VM, so they come from the WSL2 host; p99.9 is the tail metric.</p></li>
+      <li><p class="pv-c">The backtest PnL looked too good.</p><p class="pv-s">Tested <b>conservative fill assumptions</b>: trade-through-only fills, a 0.2-tick fee and 50 µs latency together turn +14,243 ticks into −959.</p></li>
+    </ol>
+  </div></section>
+  <section class="pv-sec"><h3>Results &amp; takeaways</h3><div>
+    <table class="pv-table">
+      <thead><tr><th>Round (deep book)</th><th>M events/s</th><th>p99.9 ns</th></tr></thead>
+      <tbody>
+        <tr><td>r0 std::map + std::list</td><td>2.7</td><td>2506</td></tr>
+        <tr><td>r1 node pool allocator</td><td>2.9</td><td>4404</td></tr>
+        <tr><td>r2 intrusive level queues</td><td>3.6</td><td>4571</td></tr>
+        <tr><td>r3 flat price-tick arrays</td><td>4.9</td><td>4061</td></tr>
+        <tr><td>r4 open-addressing id index</td><td>6.5</td><td>1565</td></tr>
+        <tr><td>r5 32-byte order node</td><td>9.1</td><td>1068</td></tr>
+      </tbody>
+    </table>
+    <ul class="pv-list">
+      <li><b>Tail regression found in the write-up:</b> rounds r1–r3 have a worse deep-book p99.9 than the baseline despite higher throughput; it disappears when r4 replaces <code>std::unordered_map</code>, the likely (unconfirmed) cause.</li>
+      <li><b>The fill model decides the result:</b> each conservative assumption alone cuts the backtest PnL by half or more. The synthetic flow has no adverse selection, so the PnL tests the plumbing, not the strategy.</li>
+      <li><b>One command reproduces everything:</b> <code>scripts/run_all.sh</code> builds, runs both test suites, benchmarks, backtests and plots.</li>
+    </ul>
+    <p class="pv-note">Single-threaded, in-memory, synthetic data. Measured on an Intel Core Ultra 7 155U under WSL2; compare rows within one table, not across sessions.</p>
+  </div></section>
+  <section class="pv-sec"><h3>Figures</h3><div>
+    <div class="pv-gallery pv-gallery--light">
+      <figure><img src="img/orderbook-latency.png" loading="lazy" alt="Per-event latency histogram, log scale, with percentile markers"/><figcaption>Latency per event, final book</figcaption></figure>
+      <figure><img src="img/orderbook-pnl-inventory.png" loading="lazy" alt="Market maker backtest: PnL over time in the top panel, position in the bottom panel"/><figcaption>Backtest PnL and inventory (default fill model)</figcaption></figure>
+    </div>
   </div></section>
 </template>
 
